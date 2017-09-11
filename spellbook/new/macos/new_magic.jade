@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+
+    title="Jade Template"
+
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel='stylesheet', href='//huementui.s3.amazonaws.com/cdn/2.3.9/dist/css/hui-min.css')
+  body
+    
+    div.well
+      h1
+        Jade Template
+
+    script(src='//huementui.s3.amazonaws.com/cdn/2.3.9/libs/jquery/jquery-1.10.2.min.js')
+    script(src="//huementui.s3.amazonaws.com/cdn/2.3.9/dist/js/hui.min.js")
+    script(type='text/javascript').
+    	console.log("Jade Loaded");
+  
+    #Foots.container
+    	div.row
+    		div.col-xs-12
+    			div.push
+    				&nbsp;
+    			p.text-right
+    				© 2016 Empire of Alabama
+    			div.push
+    				&nbsp;

@@ -1,0 +1,22 @@
+{
+	"version": "0.1.0",
+	"folders": {
+		"baseDir":"Mage",
+		"dotsDir":"spells/sync",
+		"infoDir":"spells/divine",
+		"codeDir":"scrolls"
+	},
+	"display": {
+		"configFile":".chunkwmrc",
+		"baseDir": "spells/adapt",
+		"options": {
+			"single": ".chunkwmrc_one",
+			"double": ".chunkwmrc_two",
+			"triple": ".chunkwmrc_three"
+		}
+	},
+	"script": {
+		"core": "mage.sh",
+		"custom": "trunk/rebuild.sh"
+	}
+}
