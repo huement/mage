@@ -37,7 +37,7 @@ function checkInstall {
     generateConfig
   fi
 
-  if is_not_file "${mageDir}/spells/divine/sample.sh"; then
+  if is_not_file "${mageDir}/spellbook/list/sample.sh"; then
     generateInfo
   fi
 
@@ -48,20 +48,20 @@ function checkInstall {
 }
 
 function generateConfig {
-CFILE="${mageDir}/config.json"
+  CFILE="${mageDir}/config.json"
 
 /bin/cat <<EOM >$CFILE
 {
 	"version": "${vMage}",
 	"folders": {
 		"baseDir":"Mage",
-		"dotsDir":"spells/sync",
-		"infoDir":"spells/divine",
-		"codeDir":"scrolls"
+		"dotsDir":"spellbook/sync",
+		"infoDir":"spellbook/list",
+		"codeDir":""
 	},
 	"display": {
 		"configFile":".chunkwmrc",
-		"baseDir": "spells/adapt",
+		"baseDir": "spellbook/adapt",
 		"options": {
 			"single": ".chunkwmrc_one",
 			"double": ".chunkwmrc_two",
@@ -77,7 +77,7 @@ EOM
 }
 
 function generateInfo {
-CFILE="${mageDir}/spells/divine/sample.sh"
+  CFILE="${mageDir}/spellbook/list/sample.sh"
 
 /bin/cat <<EOM >$CFILE
 #!/bin/bash

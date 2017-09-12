@@ -7,31 +7,6 @@
 # -----------------------------------
 mageCMD=1;
 
-function mainScript {
-  ############## Begin Script Here ###################
-  ####################################################
-
-  # If no params (argument array 0 is null)
-  if [ -z ${args[0]} ] ; then
-    header
-    nothingError
-    return ;
-  fi
-
-  # otherwise lets see what we have to do.
-  echo ""
-  case ${args[0]} in
-    i|info) logicInfo ;;
-    d|display) logicDisplay ;;
-    r|run) logicRun ;;
-    u|update) logicUpdate ;;
-    *) logicUnknown ;;
-  esac
-
-  ####################################################
-  ############### End Script Here ####################
-}
-
 #
 # Logic functions
 #   What the script ends up doing after passing setup checks
@@ -77,10 +52,8 @@ function logicDisplay {
 # documentation, snippets, or any other frequently forgotten data.
 # -----------------------------------
 function logicInfo {
-  #source "/Users/${USER}/.mumford/info/bashmarks.sh";
-	#bashmarks_info;
   if [ -z ${args[1]} ] ; then
-    header
+    header_sm
     logicInfoCat
     return ;
   else
@@ -99,18 +72,21 @@ function logicInfoCat {
   # create an array with all the filer/dir inside ~/myDir
   arrF=("${dataLocation}"/*)
   # iterate through array using a counter
-  echo "${WHT}[ INFO TOPICS ]${NORMAL}";
-  echo "  ${CYN}View topic: ${scriptName} info <option>${NORMAL}"
-  echo ""
+  printf "${B_WHT}${BBLK} INFO TOPICS ${NORMAL}            ${BCYN}cmd| ${BOLD}${scriptName} info ${NORMAL}${BCYN}<option>${NORMAL}"
+  echo -e "\n"
+  iREAL=0;
   for ((i=0; i<${#arrF[@]}; i++)); do
       #do something to each element of array
       lname=$(basename "${arrF[$i]}" .sh);
-      nNum=$(( i + 1 ));
-      echo "  $nNum | ${BGRN}${lname}${NORMAL}";
+      if [ "$lname" != "_list.md" ] && [ "$lname" != "sample" ]; then
+        nNum=$(( i + 1 ));
+        iREAL=$(( iREAL + 1 ));
+        echo "  $iREAL|  ${BGRN}${lname}${NORMAL}";
+      fi
   done
   unset lname;
 
-  echo -e "\n\n"
+  echo -e "\n\n${NORMAL}"
 }
 
 
@@ -121,7 +97,7 @@ function logicUnknown {
 
 # LOGIC ERROR HANDLER
 function nothingError {
-  die "${BRED}Error! No task given." "${scriptName} ${scriptName} <command> <param1,param2,...>";
+  die "${BRED}No task given." "${scriptName} ${scriptName} <command> <param1,param2,...>";
 }
 
 # HELP MENU
@@ -130,30 +106,28 @@ function nothingError {
 # any options for debugging or other runtime mods
 # -----------------------------------
 function usage {
-  echo ""
-  echo "$(rulemsg 'Tips and Tricks')";
-  echo -n "${NORMAL}${GRN}Mage is filled with ancient wizard magick. Its also ready to learn. Simply pop in one of your favorite scripts and Mage will instantly make it available.
+  echo -n "
+${BBLU}COMMANDS       ${BYLW} ${scriptName} <command> <param1,param2,...>
+${BRED}--------------------------------------------------------------------------
+${BBLU}list${WHT}            Info dump. If no param dump categories. Be specific!
+${BBLU}sync${WHT}            Dotfile functions. (requires param)
+${BGRN} + backup${WHT}       Backup ${USER}/dotfiles
+${BGRN} + restore${WHT}      Restore saved dotfiles
+${BGRN} + swap${WHT}         Quickly toggle dotfiles in and out.
+${BBLU}run${WHT}             Execute a given user script. (requires param)
+${BBLU}update${WHT}          Update packages and scripts
 
- ${BBLU}Available Commands:${BLU} ( ${NORMAL}${BGRN}${scriptName} <command> <param1,param2,...> ${BLU})
- ${NORMAL}${YLW}---------------------------------------------------------------------------
-  ${BBLU}divine${WHT}              Info dump. If no param dump categories. Otherwise be specific.
-  ${BBLU}sync${WHT}               Dotfile functions. (requires param)
-    ${BGRN}> backup${WHT}         Backup ${USER}/dotfiles
-    ${BGRN}> restore${WHT}        Restore saved dotfiles
-    ${BGRN}> swap${WHT}           Quickly toggle dotfiles in and out.
-  ${BBLU}run${WHT}               Execute a given user script. (requires param)
-  ${BBLU}update${WHT}            Update packages and scripts
 
- ${BPUR}Script Options:
-   ${NORMAL}${YLW}---------------------------------------------------------------------------
-      --force       Skip all user interaction.  Implied 'Yes' to all actions.
-  -q, --quiet       Quiet (no output)
-  -l, --log         Print log to file
-  -v, --verbose     Output more information. (Items echoed to 'verbose')
-  -d, --debug       Runs script in BASH debug mode (set -x)
-  -h, --help        Display this help and exit
-      --version     Output version information and exit
-"
+${BBLU}MODIFIERS
+${BRED}--------------------------------------------------------------------------
+${BBLU}--force${WHT}         Skip all user interaction.  Implied 'Yes' to all actions.
+${BBLU}-q, --quiet${WHT}     Quiet (no output)
+${BBLU}-l, --log${WHT}       Print log to file
+${BBLU}-v, --verbose${WHT}   Output more information. (Items echoed to 'verbose')
+${BBLU}-d, --debug${WHT}     Runs script in BASH debug mode (set -x)
+${BBLU}-h, --help${WHT}      Display this help and exit
+${BBLU}--version${WHT}       Output version information and exit
+    "
   echo ""
   echo ""
 }
@@ -165,53 +139,58 @@ function usage {
 #
 
 function header {
-	echo -n "${BOLD}${BWHT} __  __               
-|  \/  |__ _ __ _ ___ 
-| |\/| / _` / _` / -_)	 V| ${vMage}
-|_|  |_\__,_\__, \___|
-            |___/  ${NORMAL}";
+    printf "${BRED}";
+    cat "${mageDir}/trunk/ascii/art/mage.txt";
+    printf "\n\n${BLK}${B_WHT} V. ${vMage}                                        github.com/johnny13/Mage ${NORMAL}\n\n";
+    echo "";
+}
+
+function header_sm {
+    printf "${BRED}";
+    cat "${mageDir}/trunk/ascii/art/mage_sm.txt";
+    echo "";
 }
 
 ## Print a horizontal rule
 ## @param $1 default line break char. ie: -
 function ruleln {
-	printf -v _hr "%*s" "$(tput cols)" && echo "${_hr// /${1--}}"
+  printf -v _hr "%*s" "$(tput cols)" && echo "${_hr// /${1--}}"
 }
 
 ## Print horizontal ruler with message
 ## @param $1 message we are going to display
 ## @param $2 default line break char. ie: -
 function rulemsg {
-	if [ "$#" -eq 0 ]; then
-		echo "Usage: rulemsg MESSAGE [RULE_CHARACTER]"
-		return 1
-	fi
+  if [ "$#" -eq 0 ]; then
+    echo "Usage: rulemsg MESSAGE [RULE_CHARACTER]"
+    return 1
+  fi
 
-	# Store Cursor.
-	# Fill line with ruler character ($2, default "-")
-	# Reset cursor
-	# move 10 cols right, print message
+  # Store Cursor.
+  # Fill line with ruler character ($2, default "-")
+  # Reset cursor
+  # move 10 cols right, print message
 
-	tput sc # save cursor
-	printf -v _hr "%*s" "$(tput cols)" && echo -n "${PUR}" && echo -en ${_hr// /${2--}} && echo -en "\r\033[2C"
-	tput rc;
+  tput sc # save cursor
+  printf -v _hr "%*s" "$(tput cols)" && echo -n "${PUR}" && echo -en ${_hr// /${2--}} && echo -en "\r\033[2C"
+  tput rc;
 
-	echo -en "\r\033[10C" && echo -n "${BRED} [ ${BBLU}$1${BRED} ]" # 10 space in
+  echo -en "\r\033[10C" && echo -n "${BRED} [ ${BBLU}$1${BRED} ]" # 10 space in
 
-	echo "${NORMAL}"; # now we break
-	echo " ";
+  echo "${NORMAL}"; # now we break
+  echo " ";
 }
 
 ## Print single line comment
 ## @param $1 title or topic of comment
 ## @param $2 message we are going to display
 function simpleprint {
-	printf "%-30s %s  %60s\n" "${YLW}$1" "   " "${CYN}$2${NORMAL}";
+  printf "%-30s %s  %60s\n" "${YLW}$1" "   " "${CYN}$2${NORMAL}";
 }
 
 ## Clear some space
 function linebreak {
-	echo -e "\n\n\n";
+  echo -e "\n\n\n";
 }
 
 ## Stauts Messages
@@ -236,10 +215,10 @@ function _alert {
 
   # Print to console when script is not 'quiet'
   if [[ "${quiet}" = "true" ]] || [ "${quiet}" == "1" ]; then
-   return
+    return
   else
-   echo -e "$(date +"%r") ${color}$(printf "[%9s]" "${1}") ${_message}";
-   echo -e "${BBRED}${2}${NORMAL}";
+    echo -e "$(date +"%r") ${color}$(printf "[%9s]" "${1}") ${_message}";
+    echo -e "${BBRED}${2}${NORMAL}";
   fi
 
 }
@@ -254,13 +233,6 @@ function verbose {
     debug "$@"
   fi
 }
-
-
-#
-# Traps
-#   Functions used with different trap scenarios
-#
-
 
 # Exit Script
 # -----------------------------------
@@ -289,6 +261,10 @@ function trapCleanup {
   die "Exit trapped."  # Edit this if you like.
 }
 
+#
+# Traps
+#   Functions used with different trap scenarios
+#
 
 # Pretty Print
 # -----------------------------------
@@ -297,20 +273,20 @@ function trapCleanup {
 #                      escape code or one of the prepopulated colour variables.
 # -----------------------------------
 function pretty_print {
-    if [[ $# -eq 0 || $# -gt 2 ]]; then
-        script_exit "Invalid arguments passed to pretty_print()!" 2
-    fi
+  if [[ $# -eq 0 || $# -gt 2 ]]; then
+    script_exit "Invalid arguments passed to pretty_print()!" 2
+  fi
 
-    if [[ -z ${NORMAL-} ]]; then
-        if [[ $# -eq 2 ]]; then
-            printf '%b' "$2"
-        else
-            printf '%b' "$GRN"
-        fi
+  if [[ -z ${NORMAL-} ]]; then
+    if [[ $# -eq 2 ]]; then
+      printf '%b' "$2"
+    else
+      printf '%b' "$GRN"
     fi
+  fi
 
-    # Print message & reset text attributes
-    printf '%s%b\n' "$1" "$NORMAL"
+  # Print message & reset text attributes
+  printf '%s%b\n' "$1" "$NORMAL"
 }
 
 
@@ -320,12 +296,39 @@ function pretty_print {
 # ARGS: $@ (required): Passed through to pretty_pretty() function
 # -----------------------------------
 function verbose_print {
-    if [[ -n ${verbose-} ]]; then
-        pretty_print "$@"
-    fi
+  if [[ -n ${verbose-} ]]; then
+    pretty_print "$@"
+  fi
 }
 
 function array_print {
   echo "ARRAY: $1";
   echo "VALUE: $2";
+}
+
+function mainScript {
+  ############## Begin Script Here ###################
+  ####################################################
+
+  # If no params (argument array 0 is null)
+  if [ -z ${args[0]} ] ; then
+    header
+    usage
+    return ;
+  fi
+
+  # otherwise lets see what we have to do.
+  echo ""
+  case ${args[0]} in
+    l|list) logicInfo ;;
+    m|motd) logicDisplay ;;
+    a|adapt) logicRun ;;
+    j|jump) logicJump ;;
+    n|new) logicNew ;;
+    u|update) logicUpdate ;;
+    *) logicUnknown ;;
+  esac
+
+  ####################################################
+  ############### End Script Here ####################
 }

@@ -21,13 +21,7 @@ vMage="0.1.0";
 # Attempt to tie together numerous Shell use cases
 # Part remember what you forgot. Part automate the boring.
 # -----------------------------------
-function get_home {
-  local result; result="$(getent passwd "$1")" || return
-  echo $result | cut -d : -f 6
-}
-mageHome="$(get_home missing_user)" || {
-  echo 'User does NOT exist!'; exit 1
-}
+mageHome=$HOME;
 
 # Script Variables
 # -----------------------------------
@@ -37,15 +31,6 @@ mageHome="$(get_home missing_user)" || {
 scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 scriptName=$(basename $0)                      # Set Script Name variable
 scriptBasename="$(basename ${scriptName} .sh)" # Strips '.sh' from scriptName
-
-# Pull directory layout from config file
-dotsDir=$(jq -r ".folders.dotsDir" <<< cat "${mageHome}/Mage/config.json");
-infoDir=$(jq -r ".folders.infoDir" <<< cat "${mageHome}/Mage/config.json");
-codeDir=$(jq -r ".folders.codeDir" <<< cat "${mageHome}/Mage/config.json");
-baseDir=$(jq -r ".folders.baseDir" <<< cat "${mageHome}/Mage/config.json");
-
-mageDir="/Users/${USER}/${baseDir}"
-dataLocation="${mageDir}/${infoDir}"
 
 
 # Script Configuration
@@ -80,6 +65,7 @@ function GOOD_WOLF {
 }
 
 function BAD_WOLF {
+  echo "";
   if tput setaf 1 &> /dev/null; then
     echo "$(tput bold)$(tput setaf 15)$(tput setab 9)[FAIL]$(tput sgr0)  ${*}";
   else
@@ -112,7 +98,7 @@ function LoadUserInfo {
     if [[ -n "${debug}" ]]; then GOOD_WOLF "User directory ${dataLocation} Successfully loaded."; fi;
   else
     BAD_WOLF "Folder ${dataLocation} missing. Exiting..."
-    echo -e "\n\nThis folder contains any \'.sh\' informational files. \nTypically Snippets, Reminders, Short-cuts, Alias searching etc.";
+    echo -e "This folder contains any \'.sh\' informational files. \nTypically Snippets, Reminders, Short-cuts, Alias searching etc.";
     echo -e "\nBy default this is ${mageDir}/spells/divine and should have been installed. \n\n Run Command: mkdir ${mageDir}/spells/divine \n\nOr update ${mageDir}/config.json to a valid directory.";
     echo ""
     exit 1
@@ -128,6 +114,34 @@ function liberMage {
     exit 1
   fi
 }
+
+
+# Config.json
+# -----------------------------------
+# Pull directory layout from config file, among other things
+# -----------------------------------
+CFILE="${mageHome}/Mage/config.json";
+
+if [[ ! -f "$CFILE" ]]; then
+  CSFILE="${mageHome}/Mage/trunk/install/config.sample.json";
+  if [[ -f "$CSFILE" ]]; then
+    GOOD_WOLF "Loading Config Template | $CSFILE";
+    cp $CSFILE "${mageHome}/Mage/config.json";
+  else
+    BAD_WOLF "Config File $CFILE missing."
+    BAD_WOLF "Config Template $CSFILE missing."
+    BAD_WOLF "Exiting . . . :("
+    exit 1
+  fi;
+fi
+
+dotsDir=$(jq -r ".folders.dotsDir" <<< cat "${mageHome}/Mage/config.json");
+infoDir=$(jq -r ".folders.infoDir" <<< cat "${mageHome}/Mage/config.json");
+codeDir=$(jq -r ".folders.codeDir" <<< cat "${mageHome}/Mage/config.json");
+baseDir=$(jq -r ".folders.baseDir" <<< cat "${mageHome}/Mage/config.json");
+
+mageDir="/Users/${USER}/${baseDir}"
+dataLocation="${mageDir}/${infoDir}"
 
 # LOAD WOLF LIBRARY scripts
 # -----------------------------------
@@ -167,7 +181,6 @@ if [[ -n "${debug}" ]]; then WOLFSPEAK $dataLocation; fi;
 LoadUserInfo $dataLocation;
 
 
-
 ############## Begin Options and Usage ###################
 
 # Iterate over options breaking -ab into -a -b when needed and --foo=bar into
@@ -193,7 +206,7 @@ while (($#)); do
           break
         fi
       done
-      ;;
+    ;;
 
     # If option is of type --foo=bar
     --?*=*) options+=("${1%%=*}" "${1#*=}") ;;

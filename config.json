@@ -1,0 +1,22 @@
+{
+	"version": "0.2.0",
+	"folders": {
+		"baseDir":"Mage",
+		"dotsDir":"dotsync",
+		"infoDir":"spellbook/list",
+		"codeDir":"command"
+	},
+	"display": {
+		"configFile":".chunkwmrc",
+		"baseDir": "spellbook/adapt",
+		"options": {
+			"single": ".chunkwmrc_one",
+			"double": ".chunkwmrc_two",
+			"triple": ".chunkwmrc_three"
+		}
+	},
+	"script": {
+		"core": "mage.sh",
+		"custom": "trunk/develop/build.sh"
+	}
+}
