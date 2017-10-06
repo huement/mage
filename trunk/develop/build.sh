@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Bundle Wolf into Binary Executeable
+# Bundle mage into Binary Executeable
 # -----------------------------------
 # Takes all the required files and merges them into one
 # -----------------------------------
@@ -18,27 +18,25 @@ function liberMage {
   fi
 }
 
-fn_exists() {
+function fn_exists {
   # appended double quote is an ugly trick to make sure we do get a string -- if $1 is not a known command, type does not output anything
   [[ `type -t $1`"" == 'function' ]]
 }
 
 liberMage "../../.mage/coat.sh";
 
-$FN='shc';
+command -v /usr/bin/scp >/dev/null 2>&1 || { echo "Building requires shc, but it's not installed.  Aborting." >&2; exit 1; }
 
-if ! fn_exists $FN; then
-    echo "$FN does not exist. You're going to wanna fix that."
-    exit 2
-fi
-
+mkdir tmp
 echo "";
-echo "Creating wolfbin.sh from wolf.sh + ./wolf/*.sh . . ."
-cat mage.sh ./.mage/*.sh > mage.bundle.sh
+echo "Creating magebin.sh from mage.sh + ./mage/*.sh . . ."
+cat header.sh ../../.mage/optparse.bash ../../mage.sh ../../.mage/*.sh > ./tmp/mage.bundle.sh
 echo "Done!"
 echo ""
-echo "Generate binary from wolfbin.sh via shc command . . ."
-shc -f mage.bundle.sh -o mage
+echo "Generate binary from magebin.sh via shc command . . ."
+/usr/bin/scp -f mage.bundle.sh -o ./tmp/mage
+cp ./tmp/mage ./
+rm -rf ./tmp
 echo "Done!"
 echo ""
 echo ""

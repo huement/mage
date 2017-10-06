@@ -1,43 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-##########################################
-#	888b     d888                          #
-#	8888b   d8888                          #
-#	88888b.d88888                          #
-#	888Y88888P888 8888b.  .d88b.  .d88b.   #
-#	888 Y888P 888    "88bd88P"88bd8P  Y8b  #
-#	888  Y8P  888.d888888888  88888888888  #
-#	888   "   888888  888Y88b 888Y8b.      #
-#	888       888"Y888888 "Y88888 "Y8888   #
-#	                          888          #
-#	                     Y8b d88P          #
-#	                      "Y88P" 					 #
-##########################################
-
-vMage="0.1.0";
-
-# Bash Wizard
+# Mage : Bash Wizardary
 # -----------------------------------
 # Attempt to tie together numerous Shell use cases
 # Part remember what you forgot. Part automate the boring.
 # -----------------------------------
+
 mageHome=$HOME;
-
-# Script Variables
-# -----------------------------------
-# Mumford finds his place in the world
-# Custom data is stored in ~/.mumford by default
-# -----------------------------------
-scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-scriptName=$(basename $0)                      # Set Script Name variable
-scriptBasename="$(basename ${scriptName} .sh)" # Strips '.sh' from scriptName
-
 
 # Script Configuration
 # -----------------------------------
 # Flags which can be overridden by user input.
 # Default values are below
 # -----------------------------------
+if [ -n "${optparse_usage+1}" ]; then
+  OPTIONPARSER=true;
+else
+  source optparse.bash
+fi
+
+
 quiet=false
 printLog=false
 verbose=false
@@ -46,12 +28,14 @@ strict=false
 #debug=true
 args=()
 
-# echo ${IMPORTED["run"]};
-# exit 1;
+optparse_usage=""
+optparse_contractions=""
+optparse_defaults=""
+optparse_process=""
+optparse_arguments_string=""
 
-# Library Loading
-# -----------------------------------
-# Configuration data, ASCII Display, etc
+
+# UI Feedback Alerts
 # -----------------------------------
 function GOOD_WOLF {
   if tput setaf 1 &> /dev/null; then
@@ -86,34 +70,14 @@ function WOLFSPEAK {
   echo $wmsg;
 }
 
-# Library File Loading
+# Script Variables
 # -----------------------------------
-# Check for existence of and load all required library files.
+# Mumford finds his place in the world
+# Custom data is stored in ~/.mumford by default
 # -----------------------------------
-function LoadUserInfo {
-  if is_dir $dataLocation; then
-    # create an array with all info files
-    shopt -s nullglob
-    infoPages=("${dataLocation}"/*.sh)
-    if [[ -n "${debug}" ]]; then GOOD_WOLF "User directory ${dataLocation} Successfully loaded."; fi;
-  else
-    BAD_WOLF "Folder ${dataLocation} missing. Exiting..."
-    echo -e "This folder contains any \'.sh\' informational files. \nTypically Snippets, Reminders, Short-cuts, Alias searching etc.";
-    echo -e "\nBy default this is ${mageDir}/spells/divine and should have been installed. \n\n Run Command: mkdir ${mageDir}/spells/divine \n\nOr update ${mageDir}/config.json to a valid directory.";
-    echo ""
-    exit 1
-  fi
-}
-
-function liberMage {
-  if [[ -f "$1" ]]; then
-    source $1
-    if [[ -n "${debug}" ]]; then GOOD_WOLF "Library File $1 Successfully loaded."; fi;
-  else
-    BAD_WOLF "Library File $1 missing. Exiting..."
-    exit 1
-  fi
-}
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+scriptName=$(basename $0)                      # Set Script Name variable
+scriptBasename="$(basename ${scriptName} .sh)" # Strips '.sh' from scriptName
 
 
 # Config.json
@@ -143,45 +107,81 @@ baseDir=$(jq -r ".folders.baseDir" <<< cat "${mageHome}/Mage/config.json");
 mageDir="/Users/${USER}/${baseDir}"
 dataLocation="${mageDir}/${infoDir}"
 
-# LOAD WOLF LIBRARY scripts
-# -----------------------------------
-# These are required for Wolf and need to be loaded in correct order.
-# However, they are only loaded if we are in developer mode. As a binary we dont load these.
-# -----------------------------------
 bashLib="${mageDir}/.mage/logical.sh";
 themeLocation="${mageDir}/.mage/coat.sh";
 utilsLocation="${mageDir}/.mage/spellcast.sh";
 mageCore="${mageDir}/.mage/maintence.sh";
 
-if [[ -z "$mageSimple" ]]; then
-  if [[ -n "${debug}" ]]; then WOLFSPEAK $bashLib; fi;
-  liberMage $bashLib;
-fi
 
-if [[ -z "$BRED" ]]; then
-  if [[ -n "${debug}" ]]; then WOLFSPEAK $themeLocation; fi;
-  liberMage $themeLocation;
-fi
-
-if [[ -z "$mageCMD" ]]; then
-  if [[ -n "${debug}" ]]; then WOLFSPEAK $utilsLocation; fi;
-  liberMage $utilsLocation;
-fi
-
-if [[ -z "$mageMaintence" ]]; then
-  if [[ -n "${debug}" ]]; then WOLFSPEAK $mageCore; fi;
-  liberMage $mageCore;
-fi
-
-# USER dataLocation
+# Library File Loading
 # -----------------------------------
-# This is loaded no matter what and always from the users home directory
+# Check for existence of and load all required library files.
 # -----------------------------------
-if [[ -n "${debug}" ]]; then WOLFSPEAK $dataLocation; fi;
-LoadUserInfo $dataLocation;
+function LoadUserInfo {
+  if is_dir $dataLocation; then
+    # create an array with all info files
+    shopt -s nullglob
+    infoPages=("${dataLocation}"/*.sh)
+    if [[ -n "${debug}" ]]; then GOOD_WOLF "User directory ${dataLocation} Successfully loaded."; fi;
+  else
+    BAD_WOLF "Folder ${dataLocation} missing. Exiting..."
+    echo -e "This folder contains any \'.sh\' informational files. \nTypically Snippets, Reminders, Short-cuts, Alias searching etc.";
+    echo -e "\nBy default this is ${mageDir}/spells/divine and should have been installed. \n\n Run Command: mkdir ${mageDir}/spells/divine \n\nOr update ${mageDir}/config.json to a valid directory.";
+    echo ""
+    exit 1
+  fi
+}
+
+function liberMage {
+  if [[ -f "$1" ]]; then
+    source $1
+    if [[ -n "${debug}" ]]; then GOOD_WOLF "Library File $1 Successfully loaded."; fi;
+  else
+    BAD_WOLF "Library File $1 missing. Exiting..."
+    exit 1
+  fi
+}
+
+# LOAD WOLF LIBRARY scripts
+# -----------------------------------
+# These are required for Wolf and need to be loaded in correct order.
+# However, they are only loaded if we are in developer mode. As a binary we dont load these.
+# -----------------------------------
+# Loads bashLib, themeLocation, utilsLocation, mageCore
+function mageLibLoader {
+	if [[ -z "$mageSimple" ]]; then
+	  if [[ -n "${debug}" ]]; then WOLFSPEAK $bashLib; fi;
+	  liberMage $bashLib;
+	fi
+
+	if [[ -z "$BRED" ]]; then
+	  if [[ -n "${debug}" ]]; then WOLFSPEAK $themeLocation; fi;
+	  liberMage $themeLocation;
+	fi
+
+	if [[ -z "$mageCMD" ]]; then
+	  if [[ -n "${debug}" ]]; then WOLFSPEAK $utilsLocation; fi;
+	  liberMage $utilsLocation;
+	fi
+
+	if [[ -z "$mageMaintence" ]]; then
+	  if [[ -n "${debug}" ]]; then WOLFSPEAK $mageCore; fi;
+	  liberMage $mageCore;
+	fi
+
+	# USER dataLocation
+	# -----------------------------------
+	# This is loaded no matter what and always from the users home directory
+	# -----------------------------------
+	if [[ -n "${debug}" ]]; then WOLFSPEAK $dataLocation; fi;
+	LoadUserInfo $dataLocation;
+}
 
 
 ############## Begin Options and Usage ###################
+
+mageLibLoader
+
 
 # Iterate over options breaking -ab into -a -b when needed and --foo=bar into
 # --foo bar
