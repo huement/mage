@@ -13,37 +13,6 @@ mageCMD=1;
 #   Heavily dependent on what parameters have been passed
 #
 
-# Display Manager
-# -----------------------------------
-# Function that runs when you connect or disconnect a Display input.
-# Helpful to swap out config files for your window manager among other things.
-# -----------------------------------
-function logicDisplay {
-  if is_not_empty ${args[1]}; then
-    baseDir=$(jq -r '.display.baseDir' <<< cat './config.json');
-    configFile=$(jq -r '.display.configFile' <<< cat './config.json');
-    mapfile -t displays <<< $(jq -c -r '.display.options[]' ./config.json)
-    for i in "${displays[@]}"
-    do
-       if [ "${args[1]}" == $i ]; then
-         echo -n "${WHT}${B_BLU}[MOVE]${NORMAL} ";
-         echo "${BBLU}${baseDir}/${i}${NORMAL}";
-
-         $(/bin/cp -rf "${baseDir}/${i}" "${mageHome}/${configFile}");
-
-         if is_file "${mageHome}/${configFile}"; then
-          echo "${WHT}${B_GRN}[ OK ]${NORMAL}${BGRN} Display config updated";
-        else
-          echo "${WHT}${B_RED}[FAIL]${NORMAL}${BRED} File could not be moved";
-        fi
-        echo "";
-       fi
-    done
-  else
-    error "No dotfile option given. Try: mage display <.chunkwmrc_one|.chunkwmrc_two>";
-    safeExit;
-  fi
-}
 
 
 # Infobot

@@ -25,29 +25,62 @@ function fn_exists {
 
 liberMage "../../.mage/coat.sh";
 
-command -v /usr/bin/scp >/dev/null 2>&1 || { echo "Building requires shc, but it's not installed.  Aborting." >&2; exit 1; }
+command -v /usr/local/bin/shc >/dev/null 2>&1 || { echo "Building requires shc, but it's not installed.  Aborting." >&2; exit 1; }
+
+function startBuilding {
+	echo "\n"
+	echo "${BBLU}888b     d888       d8888 .d8888b. 8888888888 "
+	echo "8888b   d8888      d88888d88P  Y88b888        "
+	echo "${BGRN}88888b.d88888     d88P888888    888888        "
+	echo "888Y88888P888    d88P 888888       8888888    "
+	echo "888 Y888P 888   d88P  888888  88888888        "
+	echo "${BBLU}888  Y8P  888  d88P   888888    888888        "
+	echo "888       888 d8888888888Y88b  d88P888        "
+	echo "888       888d88P     888  Y8888P888888888888 "
+	echo "${NORMAL}"
+	echo "----------- [DEVELOPMENT BUILDER] -----------"
+	echo "${NORMAL}\n"
+	echo "${BGRN}[ OK ]${NORMAL} BUILD STARTING 'tmp/magebin.sh'${NORMAL}\n"
+	echo "${BBLU}[INFO]${NORMAL} CONCATING header.sh ../../mage.sh ../../.mage/*.sh${NORMAL}\n"
+}
 
 mkdir tmp
-echo "";
-echo "Creating magebin.sh from mage.sh + ./mage/*.sh . . ."
-cat header.sh ../../.mage/optparse.bash ../../mage.sh ../../.mage/*.sh > ./tmp/mage.bundle.sh
-echo "Done!"
+
+startBuilding
+
+cat ../../.mage/*.sh ../../mage.sh > ./tmp/mage.bundle.sh
+
+echo "${BGRN}[ OK ]${NORMAL} BUILD DONE!"
+
+cat ./tmp/mage.bundle.sh | egrep -v "^[[:blank:]]*#" > ./tmp/mage.clean.sh
+
+awk -i inplace 'BEGINFILE{print "#!/bin/sh"}{print}' ./tmp/mage.clean.sh
+awk -i inplace 'BEGINFILE{print "#!/bin/sh"}{print}' ./tmp/mage.bundle.sh
+
 echo ""
-echo "Generate binary from magebin.sh via shc command . . ."
-/usr/bin/scp -f mage.bundle.sh -o ./tmp/mage
+echo "${BGRN}[ OK ]${NORMAL} CODE CLEANED"
+echo ""
+echo "${BGRN}[ OK ]${NORMAL} COMPRESSING TO BINARY"
+echo ""
+
+/usr/local/bin/shc -f ./tmp/mage.clean.sh -o ./tmp/mage
+
 cp ./tmp/mage ./
-rm -rf ./tmp
-echo "Done!"
-echo ""
-echo ""
-echo "${BRED}---------------- IMPORTANT ----------------${NORMAL}"
-echo ""
-echo "a 'mage' executeable should have been created in this directory."
-echo "for system wide access, move 'mage' to a folder accessable in your \$PATH variable."
-echo ""
-echo ""
-echo "EXAMPLES"
-echo ""
-echo "${BGRN}macOS | sudo cp ./mage /usr/local/bin/mage && sudo chmod +x /usr/local/bin/mage"
-echo "${BBLU}Linux | sudo cp ./mage /usr/bin && sudo chmod +x /usr/bin/mage"
-echo "${NORMAL}"
+cp ./tmp/mage ../../
+
+if [[ -f "./mage" ]]; then
+	echo "${BGRN}[ OK ]${NORMAL} BINARY CREATED!${NORMAL}"
+	rm -rf ./tmp
+	
+	echo " \n"
+	echo "${BRED}[IMPT] ---------------- ---------------- [IMPT]${NORMAL}"
+	echo "        ${BGRN}'mage'${NORMAL} executeable built."
+	echo "         move to a \$PATH accessable dir."
+	echo "${BRED}[IMPT] ---------------- ---------------- [IMPT]${NORMAL}\n\n"
+	echo "${BBLU}[INFO] MacOS| ${NORMAL}sudo cp ./mage /usr/local/bin && sudo chmod +x /usr/local/bin/mage\n"
+	echo "${BBLU}[INFO] Linux| ${NORMAL}sudo cp ./mage /usr/bin && sudo chmod +x /usr/bin/mage"
+	echo "${NORMAL}\n"
+else
+	echo "${BRED}[FAIL]${NORMAL} magebin.sh could not be created.${NORMAL}"
+	exit 0
+fi
