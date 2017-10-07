@@ -12,7 +12,7 @@ mageCMD=1;
 #   What the script ends up doing after passing setup checks
 #   Heavily dependent on what parameters have been passed
 #
-
+source $scriptPath/.mage/coat.sh;
 
 
 # Infobot
@@ -61,7 +61,9 @@ function logicInfoCat {
 
 # LOGIC ERROR HANDLER
 function logicUnknown {
-  die "Error! Unknown Request" "Mumford did understand that command.";
+  echo -e "${B_RED}[FAIL]${NORMAL} You made an unknown request.\nGet it together, and try ${BBLU}mage --help${NORMAL} and choose an available command.\n";
+	usage
+	die "exiting..."
 }
 
 # LOGIC ERROR HANDLER
@@ -75,30 +77,29 @@ function nothingError {
 # any options for debugging or other runtime mods
 # -----------------------------------
 function usage {
-  echo -n "
-${BBLU}COMMANDS       ${BYLW} ${scriptName} <command> <param1,param2,...>
-${BRED}--------------------------------------------------------------------------
-${BBLU}list${WHT}            Info dump. If no param dump categories. Be specific!
-${BBLU}sync${WHT}            Dotfile functions. (requires param)
-${BGRN} + backup${WHT}       Backup ${USER}/dotfiles
-${BGRN} + restore${WHT}      Restore saved dotfiles
-${BGRN} + swap${WHT}         Quickly toggle dotfiles in and out.
-${BBLU}run${WHT}             Execute a given user script. (requires param)
-${BBLU}update${WHT}          Update packages and scripts
+echo "${GRN}COMMANDS        ${scriptName} <command> <param1,param2,...>
+${YLW}--------------------------------------------------------------------------
+${BLU}list${WHT}            Info dump. If no param dump categories. Be specific!
+${BLU}sync${WHT}            Dotfile functions. (requires param)
+${YLW} + backup${WHT}       Backup ${USER}/dotfiles
+${YLW} + restore${WHT}      Restore saved dotfiles
+${YLW} + swap${WHT}         Quickly toggle dotfiles in and out.
+${BLU}run${WHT}             Execute a given user script. (requires param)
+${BLU}update${WHT}          Update packages and scripts"
+echo -e "\n\n"
+}
 
-
-${BBLU}MODIFIERS
-${BRED}--------------------------------------------------------------------------
-${BBLU}--force${WHT}         Skip all user interaction.  Implied 'Yes' to all actions.
-${BBLU}-q, --quiet${WHT}     Quiet (no output)
-${BBLU}-l, --log${WHT}       Print log to file
-${BBLU}-v, --verbose${WHT}   Output more information. (Items echoed to 'verbose')
-${BBLU}-d, --debug${WHT}     Runs script in BASH debug mode (set -x)
-${BBLU}-h, --help${WHT}      Display this help and exit
-${BBLU}--version${WHT}       Output version information and exit
-    "
-  echo ""
-  echo ""
+function usagemods {
+echo "${CYN}MODIFIERS
+${BYLW}--------------------------------------------------------------------------
+${BCYN}--force${BWHT}         Skip all user interaction.  Implied 'Yes' to all actions.
+${BCYN}-q, --quiet${BWHT}     Quiet (no output)
+${BCYN}-l, --log${BWHT}       Print log to file
+${BCYN}-v, --verbose${BWHT}   Output more information. (Items echoed to 'verbose')
+${BCYN}-d, --debug${BWHT}     Runs script in BASH debug mode (set -x)
+${BPUR}-h, --help${BWHT}      Display this help and exit
+${BPUR}--version${BWHT}       Output version information and exit"
+echo "${NORMAL}"
 }
 
 
@@ -108,16 +109,16 @@ ${BBLU}--version${WHT}       Output version information and exit
 #
 
 function header {
-    printf "${BRED}";
-    cat "${mageDir}/trunk/ascii/art/mage.txt";
-    printf "\n\n${BLK}${B_WHT} V. ${vMage}                                        github.com/johnny13/Mage ${NORMAL}\n\n";
-    echo "";
+		echo ""
+    echo "                                                                 ${RED}${B_WHT}[${BLK}${vMage}${RED}]${NORMAL}${BBLU}"
+    cat "${mageDir}/trunk/ascii/art/mage.txt"
+		echo "${NORMAL}";
 }
 
 function header_sm {
     printf "${BRED}";
     cat "${mageDir}/trunk/ascii/art/mage_sm.txt";
-    echo "";
+    echo "${NORMAL}";
 }
 
 ## Print a horizontal rule
@@ -141,10 +142,10 @@ function rulemsg {
   # move 10 cols right, print message
 
   tput sc # save cursor
-  printf -v _hr "%*s" "$(tput cols)" && echo -n "${PUR}" && echo -en ${_hr// /${2--}} && echo -en "\r\033[2C"
+  printf -v _hr "%*s" "$(tput cols)" && echo -e "${PUR}" && echo -en ${_hr// /${2--}} && echo -en "\r\033[2C"
   tput rc;
 
-  echo -en "\r\033[10C" && echo -n "${BRED} [ ${BBLU}$1${BRED} ]" # 10 space in
+  echo -en "\r\033[10C" && echo -e "${BRED} [ ${BBLU}$1${BRED} ]" # 10 space in
 
   echo "${NORMAL}"; # now we break
   echo " ";
@@ -295,6 +296,7 @@ function mainScript {
     j|jump) logicJump ;;
     n|new) logicNew ;;
     u|update) logicUpdate ;;
+		x|xmenu) usagemods ;;
     *) logicUnknown ;;
   esac
 
