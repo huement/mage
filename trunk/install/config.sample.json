@@ -1,14 +1,14 @@
 {
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"folders": {
 		"baseDir":"Mage",
-		"dotsDir":"spells/sync",
-		"infoDir":"spells/divine",
-		"codeDir":"scrolls"
+		"dotsDir":"dotsync",
+		"infoDir":"spellbook/list",
+		"codeDir":"command"
 	},
 	"display": {
 		"configFile":".chunkwmrc",
-		"baseDir": "spells/adapt",
+		"baseDir": "spellbook/adapt",
 		"options": {
 			"single": ".chunkwmrc_one",
 			"double": ".chunkwmrc_two",
@@ -17,6 +17,6 @@
 	},
 	"script": {
 		"core": "mage.sh",
-		"custom": "trunk/rebuild.sh"
+		"custom": "trunk/develop/build.sh"
 	}
 }
