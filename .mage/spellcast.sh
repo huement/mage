@@ -77,21 +77,22 @@ function nothingError {
 # any options for debugging or other runtime mods
 # -----------------------------------
 function usage {
-echo "${GRN}COMMANDS        ${scriptName} <command> <param1,param2,...>
-${YLW}--------------------------------------------------------------------------
-${BLU}list${WHT}            Info dump. If no param dump categories. Be specific!
-${BLU}sync${WHT}            Dotfile functions. (requires param)
-${YLW} + backup${WHT}       Backup ${USER}/dotfiles
-${YLW} + restore${WHT}      Restore saved dotfiles
-${YLW} + swap${WHT}         Quickly toggle dotfiles in and out.
-${BLU}run${WHT}             Execute a given user script. (requires param)
-${BLU}update${WHT}          Update packages and scripts"
+echo "
+${BCYN}COMMANDS        ${scriptName} <command> <param1,param2,...>
+${WHT}--------------------------------------------------------------------------
+${BRED}list${WHT}            Info dump. If no param dump categories. Be specific!
+${BRED}sync${WHT}            Dotfile functions. (requires param)
+${CYN} + ${BBLU}backup${BWHT}          Backup ${USER}/dotfiles
+${CYN} + ${BBLU}restore${BWHT}         Restore saved dotfiles
+${CYN} + ${BBLU}swap${BWHT}            Quickly toggle dotfiles in and out.
+${BRED}run${WHT}             Execute a given user script. (requires param)
+${BRED}update${WHT}          Update packages and scripts"
 echo -e "\n\n"
 }
 
 function usagemods {
 echo "${CYN}MODIFIERS
-${BYLW}--------------------------------------------------------------------------
+${WHT}--------------------------------------------------------------------------
 ${BCYN}--force${BWHT}         Skip all user interaction.  Implied 'Yes' to all actions.
 ${BCYN}-q, --quiet${BWHT}     Quiet (no output)
 ${BCYN}-l, --log${BWHT}       Print log to file
@@ -109,10 +110,9 @@ echo "${NORMAL}"
 #
 
 function header {
-		echo ""
-    echo "                                                                 ${RED}${B_WHT}[${BLK}${vMage}${RED}]${NORMAL}${BBLU}"
+		echo -e "\n${BLU}"
     cat "${mageDir}/trunk/ascii/art/mage.txt"
-		echo "${NORMAL}";
+		echo -e "\t${RED}[${WHT}${vMage}${RED}]${NORMAL}\n";
 }
 
 function header_sm {

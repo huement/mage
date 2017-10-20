@@ -6,14 +6,14 @@ if tput setaf 1 &> /dev/null; then
 
 	# REGULAR TEXT COLORS
 	BLK="$(tput setaf 0)"         # Black
-	RED="$(tput setaf 124)"       # Red
-	GRN="$(tput setaf 64)"        # Green
-	YLW="$(tput setaf 136)"       # Yellow
-	BLU="$(tput setaf 33)"        # Blue
-	PUR="$(tput setaf 125)"       # Purple
-	CYN="$(tput setaf 37)"        # Cyan
-	WHT="$(tput setaf 15)"        # White
-
+	RED="$(tput setaf 1)"         # Red
+	GRN="$(tput setaf 2)"         # Green
+	YLW="$(tput setaf 3)"         # Yellow
+	BLU="$(tput setaf 4)"         # Blue
+	PUR="$(tput setaf 5)"         # Purple
+	CYN="$(tput setaf 6)"         # Cyan
+	WHT="$(tput setaf 7)"         # White
+                               
 	# BOLD TEXT COLORS
 	BBLK="$(tput setaf 8)"        # Black
 	BRED="$(tput setaf 9)"        # Red
@@ -25,24 +25,25 @@ if tput setaf 1 &> /dev/null; then
 	BWHT="$(tput setaf 15)"       # White
 
 	# REGULAR BACKGROUND COLORS
-	B_BLK="$(tput setab 8)"       # Black
-	B_RED="$(tput setab 9)"       # Red
-	B_GRN="$(tput setab 10)"      # Green
-	B_YLW="$(tput setab 11)"      # Yellow
-	B_BLU="$(tput setab 12)"      # Blue
-	B_PUR="$(tput setab 13)"      # Purple
-	B_CYN="$(tput setab 14)"      # Cyan
-	B_WHT="$(tput setab 15)"      # White
+	B_BLK="$(tput setab 0)"       # Black
+	B_RED="$(tput setab 1)"       # Red
+	B_GRN="$(tput setab 2)"       # Green
+	B_YLW="$(tput setab 3)"       # Yellow
+	B_BLU="$(tput setab 4)"       # Blue
+	B_PUR="$(tput setab 5)"       # Purple
+	B_CYN="$(tput setab 6)"       # Cyan
+	B_WHT="$(tput setab 7)"       # White
 
 	# BOLD BACKGROUND COLORS
 	BB_BLK="$(tput setab 8)"      # Black
-	BB_RED="$(tput setab 124)"    # Red
+	BB_RED="$(tput setab 9)"      # Red
 	BB_GRN="$(tput setab 10)"     # Green
 	BB_YLW="$(tput setab 11)"     # Yellow
 	BB_BLU="$(tput setab 12)"     # Blue
 	BB_PUR="$(tput setab 13)"     # Purple
 	BB_CYN="$(tput setab 14)"     # Cyan
-
+	BB_WHT="$(tput setab 7)"      # White
+	
 	# COLOR OPTIONS
 	NORMAL="$(tput sgr0)"         # Text Reset
 	BOLD="$(tput bold)"           # Make Bold
