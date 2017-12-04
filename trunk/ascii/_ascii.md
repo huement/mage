@@ -9,7 +9,7 @@ This works and generates ansi art that is very terminal friendly. The only cavea
 **ansize** - [https://github.com/jhchen/ansize](https://github.com/jhchen/ansize)
 This works. Uses more than just zeros.
 
-**img2txt.py [ANSI]** - [https://github.com/-/img2txt](https://github.com/-/img2txt)
+**img2txt.py [ANSI]** - [https://github.com/hit9/img2txt](https://github.com/hit9/img2txt)
 ```bash
 $ python img2txt.py mm_crest_180_215.png --ansi --maxLen 50 --targetAspect 0.5
 ```

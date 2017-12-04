@@ -1,0 +1,6 @@
+#
+# macOS.gitignore
+#
+bash_sys_info-master/*
+linux/*
+ufetch/*

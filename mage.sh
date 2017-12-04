@@ -20,37 +20,34 @@
 # ---------------------------------------- #
 #																					 #
 
-# source optparse.bash
-# # Define options
-# optparse.define short=o long=output desc="The output file" variable=output_mode default=head_output.txt default=false
-# optparse.define short=q long=quiet desc="Display no console output" variable=quiet_mode value=true default=false
-# optparse.define short=V long=verbose desc="Flag to set verbose (debug mode) to on" variable=verbose_mode value=true default=false
-# optparse.define short=v long=version desc="Print current version and exit" variable=version_mode value=true default=false
-# optparse.define short=u long=update desc="Update this script" variable=update_mode value=true default=false
-#
-# optparse.define short=l long=list desc="Load and run user configured info files. Display documentation, snippets, or any other frequently forgotten data." variable=OPT_logicInfo value=true default=false
-# optparse.define short=m long=motd desc="Message of the day. Useful for shell startup welcome messages." variable=OPT_logicDisplay value=true default=false
-# optparse.define short=j long=jump desc="Status / Config for the 'jump' command. Useful if bash directory bookmarking is your thing." variable=OPT_logicJump value=true default=false
-# optparse.define short=s long=sync desc="Dotfile and user config management. Save, restore, or swap configs in and out." variable=OPT_logicDot value=true default=false
-# optparse.define short=e long=exec desc="Quickly list and/or execute saved user scripts. Your command list automatically populates from folder contents." variable=OPT_logicExec value=true default=false
-# source $( optparse.build )
-#
-# if [ "$version_mode" == "" ]; then
-# 	echo "ERROR: you suck."
-# 	exit 1
-# fi
-#
-# exit 1
-mageHome=$HOME;
 vMage="0.1.0";
-quiet=false
-printLog=false
-verbose=false
-force=false
-strict=false
+#debug=true;
+quiet=false;
+printLog=false;
+verbose=false;
+force=false;
+strict=false;
 
-args=()
-#debug=true
+# Script Variables
+# -----------------------------------
+# Configurable Options. Default installs into ~/Mage
+# -----------------------------------
+mageHome=$HOME;
+scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
+scriptName=$(basename $0);
+scriptBasename="$(basename ${scriptName} .sh)";
+mageDir="/Users/${USER}/Mage";
+dataLocation="${mageDir}/${infoDir}";
+CFILE="${mageDir}/config.json";
+
+# REQUIRED LIBRARY FILES
+bashLib="${mageDir}/.mage/logical.sh";
+themeLocation="${mageDir}/.mage/coat.sh";
+utilsLocation="${mageDir}/.mage/spellcast.sh";
+mageCore="${mageDir}/.mage/maintence.sh";
+
+# Required var for CLI arguments
+args=();
 
 # UI Feedback Alerts
 # -----------------------------------
@@ -88,14 +85,6 @@ function WOLFSPEAK {
   echo "${INFOSTRING} ${*}";
 }
 
-# Script Variables
-# -----------------------------------
-# Mumford finds his place in the world
-# Custom data is stored in ~/.mumford by default
-# -----------------------------------
-scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-scriptName=$(basename $0)
-scriptBasename="$(basename ${scriptName} .sh)"
 
 # Library File Loading
 # -----------------------------------
@@ -160,10 +149,8 @@ function mageLibCheck {
 # -----------------------------------
 # Pull directory layout from config file, among other things
 # -----------------------------------
-CFILE=$mageHome/Mage/config.json;
-
 if [[ ! -f "$CFILE" ]]; then
-	NEWDIR=$mageHome/Mage
+	NEWDIR=$mageDir
 	if [[ ! -d "$NEWDIR" ]]; then
 		BAD_WOLF "Directory ${NEWDIR} missing."
 		WOLFSPEAK "Creating ${NEWDIR}"
@@ -175,7 +162,7 @@ if [[ ! -f "$CFILE" ]]; then
 	
   if [[ -f "$CSFILE" ]]; then
     echo "Attempting to generate a new config.json"
-		cp $CSFILE $HOME/Mage/config.json
+		cp $CSFILE $mageDir/config.json
   else
     BAD_WOLF "${BRED}FATAL!${NORMAL} Missing Template | ${CSFILE}"
     echo -e "\nAll out of ideas. Exiting.\n\n"
@@ -183,10 +170,10 @@ if [[ ! -f "$CFILE" ]]; then
   fi
 fi
 
-if [[ ! -f "${mageHome}/Mage/config.json" ]]; then
-  BAD_WOLF "${BRED}FATAL! | ${mageHome}/Mage/config.json not restored${NORMAL}"
+if [[ ! -f "${mageDir}/config.json" ]]; then
+  BAD_WOLF "${BRED}FATAL! | ${mageDir}/config.json not restored${NORMAL}"
 	echo -e "\nTry running this command:\n"
-	echo "${BBLU}cp $CSFILE $HOME/Mage/config.json${NORMAL}"
+	echo "${BBLU}cp ${CSFILE} ${mageDir}/config.json${NORMAL}"
 	echo -e "\n\nAll out of ideas. Exiting.\n\n" 
 	exit 1
 else
@@ -195,14 +182,6 @@ else
 	codeDir=$(jq -r ".folders.codeDir" <<< cat $mageHome/Mage/config.json);
 	baseDir=$(jq -r ".folders.baseDir" <<< cat $mageHome/Mage/config.json);
 fi
-
-mageDir="/Users/${USER}/Mage"
-dataLocation="${mageDir}/${infoDir}"
-bashLib="${mageDir}/.mage/logical.sh"
-themeLocation="${mageDir}/.mage/coat.sh"
-utilsLocation="${mageDir}/.mage/spellcast.sh"
-mageCore="${mageDir}/.mage/maintence.sh"
-
 
 # LOAD WOLF LIBRARY scripts
 # -----------------------------------

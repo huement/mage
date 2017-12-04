@@ -5,16 +5,9 @@
 #  Keep track of all your configs and OS customizations.
 #  Uses the 'Stow' command and supports cloud backups
 #######################################################
-
-function StowInfo {
-	echo "${B_YLW}${BLK}  GNU Stow - Dotfiles manager  ${NORMAL}";
-	echo "${BBLU}stow -t ~/where/dir/syslinks_are syslinks ${WHT}- You select your target (ie /home or whatever).";
-	echo "Its important to note it goes target stow first. BEFORE you give it source dir.";
-	echo "";
-	echo "https://spin.atomicobject.com/2014/12/26/manage-dotfiles-gnu-stow/";
-	echo "${NORMAL}";
-	echo "";
-}
+if [ -f ~/.bash_rainbow ]; then
+    source ~/.bash_rainbow
+fi
 
 function stowHelp {
 	echo "";
@@ -35,7 +28,42 @@ function stowHelp {
 }
 
 function isStowInstalled {
-	command -v foo >/dev/null 2>&1 || { stowHelp >&2; exit 1; }
+	command -v stow >/dev/null 2>&1 || { stowHelp >&2; exit 1; }
 }
 
-stowHelp
+function DisplayInfo {
+  echo "${RED}";
+  echo -e "\n\nNo --build option not set. Displaying info.\nRun again with --build for template setup.\n";
+  echo "${BYLW}-------------------------------------------------------";
+  echo "";
+	echo "${BWHT}GNU Stow - Dotfiles manager${NORMAL}";
+  echo -e "\nStow command run from ~/mage/dotsync/";
+	echo "${B_GRN}${BBLK} stow --ignore=\"(^\.DS_Store)\" -t ~/ bash${NORMAL}";
+  echo "";
+  echo "Entire start to finish flow...${BLU}";
+  echo -e "cd ~/mage/dotsync/\nmkdir ./bash\nmv ~/.bashrc ./bash\n[move other relevant files]\nstow --ignore=\"(^\.DS_Store)\" -t ~/ bash\n";
+	echo -e "${BGRN}";
+	echo "${NORMAL}";
+  echo "${BYLW}-------------------------------------------------------";
+	echo "";
+}
+
+function TemplateBuild {
+  echo "";
+  echo "STARTING BUILD.  .   ."
+  mkdir ./bash
+  mv ~/.bashrc ./bash
+  mv ~/.bash_profile ./bash
+  mv ~/.profile ./bash
+  echo ""
+  echo "BUILD FINISHED!"
+  echo ""
+}
+
+if [[ $# -eq 0 ]] ; then
+  isStowInstalled
+  DisplayInfo
+  exit 1
+else
+  TemplateBuild
+fi

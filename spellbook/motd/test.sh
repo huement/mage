@@ -3,26 +3,29 @@ exit_with_error() {
   exit 1;
 }
 
-/usr/local/bin/brew update > /dev/null || exit_with_error;
+#/usr/local/bin/brew update > /dev/null || exit_with_error;
 
-PINNED=$(/usr/local/bin/brew list --pinned);
-OUTDATED=$(/usr/local/bin/brew outdated --quiet);
-
-UPDATES=$(comm -13 <(for X in "${PINNED[@]}"; do echo "${X}"; done) <(for X in "${OUTDATED[@]}"; do echo "${X}"; done))
-
-UPDATE_COUNT=$(echo "$UPDATES" | grep -c '[^[:space:]]');
-
-echo "↑$UPDATE_COUNT | dropdown=false"
-echo "---";
-if [ -n "$UPDATES" ]; then
-  echo "Upgrade all | bash=/usr/local/bin/brew param1=upgrade terminal=false refresh=true"
-  echo "$UPDATES" | awk '{print $0 " | terminal=false refresh=true bash=/usr/local/bin/brew param1=upgrade param2=" $1}'
-fi
-
-exit 1
+# PINNED=$(/usr/local/bin/brew list --pinned);
+# OUTDATED=$(/usr/local/bin/brew outdated --quiet);
+#
+# UPDATES=$(comm -13 <(for X in "${PINNED[@]}"; do echo "${X}"; done) <(for X in "${OUTDATED[@]}"; do echo "${X}"; done))
+#
+# UPDATE_COUNT=$(echo "$UPDATES" | grep -c '[^[:space:]]');
+#
+# echo "↑$UPDATE_COUNT | dropdown=false"
+# echo "---";
+# if [ -n "$UPDATES" ]; then
+#   echo "Upgrade all | bash=/usr/local/bin/brew param1=upgrade terminal=false refresh=true"
+#   echo "$UPDATES" | awk '{print $0 " | terminal=false refresh=true bash=/usr/local/bin/brew param1=upgrade param2=" $1}'
+# fi
+#
+# exit 1
 
 
 INFO=$(uptime | sed 's/^ *//g')
+IFS="  " read -a myarray <<< $(uptime | sed 's/^ *//g')
+LOADAVGS="${myarray[7]}|${myarray[8]}|${myarray[9]}"
+
 echo "$INFO" | awk -F'[ ,:\t\n]+' '
     {
         PLURAL = 1
@@ -70,8 +73,7 @@ echo "$INFO" | awk -F'[ ,:\t\n]+' '
 
         # remove the remaining SEP
         MSG = substr(MSG, 0, length(MSG) - length(SEP))
-
-        print "[", MSG, "] | size=12"
+        printf "[ $MSG"
     }
 
     function include(VAL, UNIT, SUFFIX, PLURAL, VERBOSE) {
@@ -87,6 +89,6 @@ echo "$INFO" | awk -F'[ ,:\t\n]+' '
             # return ""
         }
 }'
-
+echo -en "${LOADAVGS} ]"
 echo "---"
-echo "$INFO" | tr "," " " | tail -n 2
+#echo "$INFO" | tr "," " " | tail -n 2

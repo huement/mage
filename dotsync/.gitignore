@@ -1,0 +1,8 @@
+#
+# macOS.gitignore
+#
+bash/*
+git/*
+node/*
+php/*
+ui/*
