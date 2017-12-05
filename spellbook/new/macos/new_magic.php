@@ -1,8 +1,0 @@
-<?php
-  
-  // PHP Pumpkin Party
-  
-  
-  
-  
-?>
