@@ -1,0 +1,47 @@
+local:
+  vhost: "{{ home_url }}"
+  wordpress_path: "{{ wordpress_path }}" # use an absolute path here
+
+  database:
+    name: "{{ db_name }}"
+    user: "{{ db_user }}"
+    password: "{{ db_pass }}"
+    host: "{{ db_host }}"
+    charset: "{{ db_charset }}"
+
+  # paths: # you can customize wordpress internal paths
+  #   wp_content: "wp-content"
+  #   uploads: "wp-content/uploads"
+  #   plugins: "wp-content/plugins"
+  #   mu_plugins: "wp-content/mu-plugins"
+  #   themes: "wp-content/themes"
+  #   languages: "wp-content/languages"
+
+production:
+  vhost: "http://example.com"
+  wordpress_path: "/var/www/your_site" # use an absolute path here
+
+  database:
+    name: "database_name"
+    user: "user"
+    password: "password"
+    host: "host"
+    mysqldump_options: "--max_allowed_packet=50MB" # Only available if using SSH
+
+  exclude:
+    - ".git/"
+    - ".gitignore"
+    - ".sass-cache/"
+    - "bin/"
+    - "tmp/*"
+    - "Gemfile*"
+    - "Movefile"
+    - "wp-config.php"
+    - "wp-content/*.sql"
+
+  # SSH Credentials for Production Server!
+  ssh:
+    host: "host"
+    user: "user"
+    port: 22
+    rsync_options: --verbose

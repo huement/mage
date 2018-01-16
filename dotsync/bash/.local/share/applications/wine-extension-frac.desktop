@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=3d fractal rendering
+MimeType=application/x-wine-extension-frac;
+Exec=env WINEPREFIX="/Users/derekscott/Applications/Wineskin/MFractal.app/Contents/Resources" wine start /ProgIDOpen fracfile %f
+NoDisplay=true
+StartupNotify=true
+Icon=49EC_Mandelbulb3D.0

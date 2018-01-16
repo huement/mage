@@ -1,0 +1,137 @@
+#!/bin/bash
+
+#
+#  _________ .__                  __     __      __  _____   
+#  \_   ___ \|  |__  __ __  ____ |  | __/  \    /  \/     \  
+#  /    \  \/|  |  \|  |  \/    \|  |/ /\   \/\/   /  \ /  \ 
+#  \     \___|   Y  \  |  /   |  \    <  \        /    Y    \
+#   \______  /___|  /____/|___|  /__|_ \  \__/\  /\____|__  /
+#          \/     \/           \/     \/       \/         \/ 
+#
+
+#
+# Plugins handled via Homebrew
+#
+chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
+#chunkc core::load border.so
+chunkc core::load tiling.so
+#chunkc core::load ffm.so
+chunkc core::hotload 0
+
+#
+# Desktop Confgis
+#
+chunkc set global_desktop_mode           bsp
+chunkc set 1_desktop_mode                bsp
+chunkc set 2_desktop_mode                bsp
+chunkc set 3_desktop_mode                float
+chunkc set 4_desktop_mode                bsp
+chunkc set 5_desktop_mode                bsp
+#chunkc set 6_desktop_mode                float
+
+#chunkc set 1_desktop_tree                ~/.chunkwm_layouts/dev_1
+
+chunkc set global_desktop_offset_top     60
+chunkc set global_desktop_offset_bottom  60
+chunkc set global_desktop_offset_left    30
+chunkc set global_desktop_offset_right   30
+chunkc set global_desktop_offset_gap     30
+
+# chunkc set 1_desktop_offset_top          40
+# chunkc set 1_desktop_offset_bottom       60
+# chunkc set 1_desktop_offset_left         30
+# chunkc set 1_desktop_offset_right        40
+# chunkc set 1_desktop_offset_gap          60
+
+# chunkc set 2_desktop_offset_top          40
+# chunkc set 2_desktop_offset_bottom       60
+# chunkc set 2_desktop_offset_left         30
+# chunkc set 2_desktop_offset_right        40
+# chunkc set 2_desktop_offset_gap          60
+
+# chunkc set 3_desktop_offset_top          40
+# chunkc set 3_desktop_offset_bottom       60
+# chunkc set 3_desktop_offset_left         20
+# chunkc set 3_desktop_offset_right        30
+# chunkc set 3_desktop_offset_gap          60
+
+chunkc set 4_desktop_offset_top          60
+chunkc set 4_desktop_offset_bottom       60
+chunkc set 4_desktop_offset_left         40
+chunkc set 4_desktop_offset_right        40
+chunkc set 4_desktop_offset_gap          40
+
+chunkc set 5_desktop_offset_top          60
+chunkc set 5_desktop_offset_bottom       60
+chunkc set 5_desktop_offset_left         40
+chunkc set 5_desktop_offset_right        40
+chunkc set 5_desktop_offset_gap          40
+
+chunkc set desktop_padding_step_size     10
+chunkc set desktop_gap_step_size         10
+
+chunkc set bsp_spawn_left                1
+chunkc set bsp_optimal_ratio             1.618
+chunkc set bsp_split_mode                optimal
+chunkc set bsp_split_ratio               0.5
+
+chunkc set window_focus_cycle            monitor
+chunkc set focus_follows_mouse           1
+chunkc set mouse_follows_focus           1
+chunkc set window_float_next             0
+chunkc set window_float_center           1
+chunkc set window_region_locked          1
+chunkc set mouse-drag                    1
+chunkc set mouse-drag mod                fn
+chunkc set window_float_topmost          1
+
+#
+# NOTE: shell commands require escaped quotes
+#       to pass value containing a whitespace.
+#
+# chunkc set mouse_modifier              \"cmd shift\"
+chunkc set mouse_modifier                fn
+
+chunkc set preselect_border_color        0xff636363
+chunkc set preselect_border_width        1
+chunkc set preselect_border_radius       0
+
+#
+# NOTE: these settings require chwm-sa.
+#       (https://github.com/koekeishiya/chwm-sa)
+#
+
+chunkc set window_float_topmost          0
+chunkc set window_fade_inactive          0
+chunkc set window_fade_alpha             0.85
+chunkc set window_fade_duration          0.25
+chunkc set window_use_cgs_move           0
+
+#
+# NOTE: the following are config variables for the chunkwm-border plugin.
+#
+
+chunkc set focused_border_color          0x003f3f3f
+chunkc set focused_border_width          0
+chunkc set focused_border_radius         0
+chunkc set focused_border_skip_floating  1
+
+#
+# NOTE: shell commands require escaped quotes
+#       to pass value containing a whitespace.
+#
+chunkc tiling::rule --owner Übersicht --role AXWindow --subrole AXDialog --state float
+chunkc tiling::rule --owner Finder --name Copy --state float
+chunkc tiling::rule --owner Finder --name \"Archive Utility\" --state float
+chunkc tiling::rule --owner Finder --name Trash --state float
+chunkc tiling::rule --owner Calculator --state float
+chunkc tiling::rule --owner \"*\" --name Copy --state float
+chunkc tiling::rule --owner \"*\" --name \"Archive Utility\" --state float
+chunkc tiling::rule --owner \"*\" --name Trash --state float
+chunkc tiling::rule --owner  \"Archive Utility\" --state float
+chunkc tiling::rule --owner \"App Store\" --state float
+chunkc tiling::rule --owner Harvest --state float
+#chunkc tiling::rule --owner Cyberduck --state float
+chunkc tiling::rule --owner Cyberduck --name Transfers --state float
+chunkc tiling::rule --owner PhpStorm --name \"*\" --state float
+chunkc tiling::rule --owner Pixelmator --state float

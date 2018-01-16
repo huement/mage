@@ -13,7 +13,7 @@ function liberMage {
 		BGRN=""
 		BBLU=""
 		NORMAL=""
-    echo "Color Library File $1 missing..."
+    echo "Library File $1 missing..."
     #exit 1
   fi
 }
@@ -70,7 +70,7 @@ cp ./tmp/mage ../../
 
 if [[ -f "./mage" ]]; then
 	echo "${BGRN}[ OK ]${NORMAL} BINARY CREATED!${NORMAL}"
-	rm -rf ./tmp
+	#rm -rf ./tmp
 	
 	echo " \n"
 	echo "${BRED}[IMPT] ---------------- ---------------- [IMPT]${NORMAL}"

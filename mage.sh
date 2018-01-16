@@ -12,7 +12,7 @@
 # 	888       888"Y888888 "Y88888 "Y8888   #
 # 	                          888          #
 # 	                     Y8b d88P          #
-# 	                      "Y88P" 	0.2.0 	 #
+# 	                      "Y88P" 	      	 #
 #																		       #
 # ---------------------------------------- #
 #   Empower yourself and your shell env    #
@@ -20,7 +20,7 @@
 # ---------------------------------------- #
 #																					 #
 
-vMage="0.1.0";
+vMage="0.3.0";
 #debug=true;
 quiet=false;
 printLog=false;
@@ -36,8 +36,7 @@ mageHome=$HOME;
 scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 scriptName=$(basename $0);
 scriptBasename="$(basename ${scriptName} .sh)";
-mageDir="/Users/${USER}/Mage";
-dataLocation="${mageDir}/${infoDir}";
+mageDir="${HOME}/Mage";
 CFILE="${mageDir}/config.json";
 
 # REQUIRED LIBRARY FILES
@@ -103,8 +102,8 @@ function LoadUserInfo {
 }
 function libraryError {
 	BAD_WOLF "FATAL! Folder ${dataLocation} missing!"
-  echo -e "${mageDir}/spellbook/list contains any ${BBLU}*.sh${NORMAL} type files used for information reminders, snippets, etc.. \nTypically Snippets, Reminders, Short-cuts, Alias searching etc.";
-  echo -e "\nBy default this is ${dataLocation} and should have been installed. \n\nRun Command: mkdir ${dataLocation} \n\nOr update ${mageDir}/config.json to a valid directory.\n";
+  printf "${mageDir}/spellbook/list contains any ${BBLU}*.sh${NORMAL} type files used for information reminders, snippets, etc.. \nTypically Snippets, Reminders, Short-cuts, Alias searching etc.";
+  printf "\nBy default this is ${dataLocation} and should have been installed. \n\nRun Command: mkdir ${dataLocation} \n\nOr update ${mageDir}/config.json to a valid directory.\n";
 }
 function mageLibCheck {
 	GTG=0
@@ -136,10 +135,10 @@ function mageLibCheck {
 		exit 1
 	else
 		if [[ $GTG -eq 1 ]]; then
-			echo -e "\n --------------- [UPDATED] ---------------\n"
+			printf "\n --------------- [UPDATED] ---------------\n"
 			GOOD_WOLF "${BBLU}MAGE LIBS @ ${BGRN}${mageDir}${NORMAL}"
 			GOOD_WOLF "${BBLU}SPELLBOOK @ ${BGRN}${dataLocation}${NORMAL}"
-			echo -e "\n\n"
+			printf "\n\n"
 		fi
 	fi
 	unset GTG
@@ -165,22 +164,23 @@ if [[ ! -f "$CFILE" ]]; then
 		cp $CSFILE $mageDir/config.json
   else
     BAD_WOLF "${BRED}FATAL!${NORMAL} Missing Template | ${CSFILE}"
-    echo -e "\nAll out of ideas. Exiting.\n\n"
+    printf "\nAll out of ideas. Exiting.\n\n"
     exit 1
   fi
 fi
 
 if [[ ! -f "${mageDir}/config.json" ]]; then
   BAD_WOLF "${BRED}FATAL! | ${mageDir}/config.json not restored${NORMAL}"
-	echo -e "\nTry running this command:\n"
+	printf "\nTry running this command:\n"
 	echo "${BBLU}cp ${CSFILE} ${mageDir}/config.json${NORMAL}"
-	echo -e "\n\nAll out of ideas. Exiting.\n\n" 
+	printf "\n\nAll out of ideas. Exiting.\n\n" 
 	exit 1
 else
 	dotsDir=$(jq -r ".folders.dotsDir" <<< cat $mageHome/Mage/config.json);
 	infoDir=$(jq -r ".folders.infoDir" <<< cat $mageHome/Mage/config.json);
 	codeDir=$(jq -r ".folders.codeDir" <<< cat $mageHome/Mage/config.json);
 	baseDir=$(jq -r ".folders.baseDir" <<< cat $mageHome/Mage/config.json);
+  dataLocation="${mageDir}/${infoDir}";
 fi
 
 # LOAD WOLF LIBRARY scripts

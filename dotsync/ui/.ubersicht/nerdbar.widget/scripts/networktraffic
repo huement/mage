@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function getBytes {
+    /usr/sbin/netstat -w1 > /Users/derekscott/Mage/dotsync/ui/.ubersicht/nerdbar.widget/scripts/network.out & sleep 1.5; kill $!;
+}
+BYTES=$(getBytes > /dev/null);
+BYTES=$(cat /Users/derekscott/Mage/dotsync/ui/.ubersicht/nerdbar.widget/scripts/network.out | /usr/bin/grep '[0-9].*');
+BYTES=$(echo $BYTES | /usr/local/bin/awk '{print $3 "@" $6}');
+echo $BYTES;

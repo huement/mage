@@ -1,0 +1,39 @@
+{
+    "name": "wp-cli/wp-cli",
+    "description": "Installed community packages used by WP-CLI",
+    "version": "1.4.0",
+    "authors": [
+        {
+            "name": "WP-CLI",
+            "email": "noreply@wpcli.org"
+        }
+    ],
+    "homepage": "https://wp-cli.org/package-index/",
+    "require": {
+        "aaemnnosttv/wp-cli-dotenv-command": "dev-master",
+        "anhskohbo/wp-cli-themecheck": "dev-master",
+        "pantheon-systems/wp_launch_check": "dev-master",
+        "vccw/wp-cli-scaffold-movefile": "@stable",
+        "growella/update-check": "dev-master"
+    },
+    "require-dev": {},
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "repositories": {
+      "wp-cli": {
+          "type": "composer",
+          "url": "https://wp-cli.org/package-index/"
+      },
+      "composer": {
+        "type": "composer",
+        "url": "https://wpackagist.org"
+      },
+        "growella/update-check": {
+            "type": "vcs",
+            "url": "https://github.com/growella/update-check.git"
+        }
+    },
+    "config": {
+        "secure-http": true
+    }
+}

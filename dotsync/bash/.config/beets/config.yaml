@@ -1,0 +1,15 @@
+directory: ~/Music/iTunes/iTunes\ Media/Music # Where does the music live?
+library: ~/.mpd/beets/musiclibrary.blb    # Where does the beets database live?
+import:
+    move: no                              # Move your files to ~/Music/beets after import
+plugins: lastgenre fetchart ftintitle mpdupdate smartplaylist random embedart
+embedart:
+    auto: yes                              # Embed album art in the music files
+mpdupdate:
+    host: localhost
+    port: 6600
+smartplaylist:
+    playlist_dir: ~/Music/iTunes/iTunes\ Media/Playlists
+    playlists:
+        - name: all.m3u
+          query: ''                  # Matches all music in your library

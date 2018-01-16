@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+BASE="~/Mage/dotsync/ui/.ubersicht/"
+echo "$(sh ${BASE}nerdbar.widget/scripts/time_script)@$(sh ${BASE}nerdbar.widget/scripts/date_script)@$(sh ${BASE}nerdbar.widget/scripts/battery_percentage_script)%@$(sh ${BASE}nerdbar.widget/scripts/battery_charging_script)@$(sh ${BASE}nerdbar.widget/scripts/wifi_status_script)"

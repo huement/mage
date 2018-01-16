@@ -1,0 +1,279 @@
+"*":
+  "Sublime-Style-Column-Selection":
+    selectKeyTrigger: "Shift"
+  aligner:
+    alignComments: true
+  "aligner-css":
+    ":-leftSpace": true
+  "aligner-javascript":
+    ",-leftSpace": true
+    ",-rightSpace": false
+    ":-alignment": "left"
+    ":-leftSpace": true
+    "=-alignment": "right"
+    "from-alignment": "right"
+  "aligner-scss": {}
+  "atom-beautify":
+    general:
+      beautifyEntireFileOnSave: false
+    html:
+      brace_style: "expand"
+    js:
+      brace_style: "collapse-preserve-inline"
+      break_chained_methods: true
+      default_beautifier: "Pretty Diff"
+      end_with_comma: true
+      preserve_newlines: false
+      space_before_conditional: false
+    json:
+      beautify_on_save: true
+      brace_style: "none"
+      default_beautifier: "Pretty Diff"
+      end_with_comma: true
+      keep_array_indentation: true
+      keep_function_indentation: true
+      space_before_conditional: false
+    jsx:
+      e4x: false
+      preserve_newlines: false
+      space_before_conditional: false
+  "atom-easy-jsdoc":
+    beta: true
+    useReturns: true
+  "atom-material-ui":
+    colors:
+      abaseColor: "#e14e46"
+      accentColor: "#ede9d8"
+      paintCursor: true
+      predefinedColor: "Red"
+    fonts:
+      fontSize: 14
+    tabs:
+      compactTabs: true
+      noTabMinWidth: true
+      tintedTabBar: true
+    ui: {}
+  "color-picker":
+    uppercaseColorValues: true
+  core:
+    audioBeep: false
+    closeDeletedFileTabs: true
+    disabledPackages: [
+      "atom-live-server"
+      "linter-jshint"
+      "toolbar-basic"
+      "toolbar-iconshortcuts"
+      "tool-bar-almighty"
+      "rainbow"
+      "linter"
+      "jsformat"
+      "pretty-json"
+      "aligner-typescript"
+      "flatten-json"
+      "intentions"
+      "react"
+      "sort-lines"
+      "fancy-react"
+      "sass-compiler"
+      "atom-sort-sass"
+    ]
+    ignoredNames: [
+      ".git"
+      "node_modules"
+    ]
+    projectHome: "/Volumes/FloppyDisk"
+    restorePreviousWindowsOnStart: "no"
+    telemetryConsent: "no"
+    themes: [
+      "pristine-ui"
+      "atom-dark-monokai-syntax"
+    ]
+    titleBar: "custom"
+    useProxySettingsWhenCallingApm: false
+  editor:
+    fontFamily: "Fira Code"
+    fontSize: 13
+    lineHeight: 1.2
+    preferredLineLength: 180
+    showCursorOnSelection: false
+    softWrap: true
+    tabType: "soft"
+    undoGroupingInterval: 250
+  "eslint-fixer":
+    ysuccess:
+      contents: true
+    zerror:
+      type: "timed"
+  "exception-reporting":
+    userId: "0791dbbf-2c18-46f8-8468-33dc4ebfff8c"
+  "fancy-react":
+    packagePath: "public"
+    sourcePath: "build"
+    testPath: "tests"
+    testSuffix: "-arm-test"
+  "file-icons":
+    coloured: false
+  "format-shell":
+    shfmtPath: "/Applications/Developer/shfmt_v2.1.0_darwin_386"
+    showNotifications: true
+  "ide-php":
+    phpPath: "/usr/local/bin/php"
+  jsformat:
+    format_on_save: false
+    jslint_happy: true
+    keep_array_indentation: true
+    keep_function_indentation: true
+  linter:
+    lintOnChange: false
+    lintOnOpen: false
+    lintPreviewTabs: false
+  "linter-checkbashisms":
+    executablePath: "/usr/local/bin/checkbashisms"
+  "linter-eslint":
+    eslintrcPath: "~/.eslintrc"
+    ignoreFixableRulesWhileTyping: true
+    rulesToSilenceWhileTyping: [
+      "no-trailing-spaces"
+      "eol-last"
+      "no-unused-vars"
+    ]
+  "linter-php":
+    executablePath: "/usr/local/bin/php"
+  "linter-shellcheck":
+    enableNotice: true
+    shellcheckExecutablePath: "/usr/local/bin/shellcheck"
+  "linter-ui-default":
+    gutterPosition: "Left"
+    panelHeight: 357
+    statusBarPosition: "Right"
+  "night-day-theming":
+    darkSyntaxTheme: "atom-material-syntax-dark"
+    darkUITheme: "dash-ui"
+    lightSyntaxTheme: "atom-dark-monokai-syntax"
+    lightUITheme: "pristine-ui"
+  perfectionist: {}
+  "platformio-ide-terminal":
+    ansiColors:
+      normal:
+        black: "#676866"
+        blue: "#80b4e7"
+        cyan: "#6dbebd"
+        green: "#9cde66"
+        magenta: "#eb617f"
+        red: "#d0534a"
+        white: "#eb617f"
+        yellow: "#e8d86a"
+      zBright:
+        brightBlack: "#363936"
+        brightBlue: "#28acfc"
+        brightCyan: "#1d8f8d"
+        brightGreen: "#2dce2f"
+        brightMagenta: "#e73573"
+        brightRed: "#d22617"
+        brightWhite: "#d3d6d5"
+        brightYellow: "#e4b300"
+    core:
+      mapTerminalsTo: "Folder"
+    iconColors:
+      blue: "#28acfc"
+      cyan: "#1d8f8d"
+      green: "#2dce2f"
+      magenta: "#e73573"
+      orange: "#df661c"
+      pink: "#e73573"
+      purple: "#a73aa8"
+      red: "#d22617"
+      yellow: "#e4b300"
+    style:
+      defaultPanelHeight: "400px"
+      fontFamily: "Fira Code"
+      fontSize: "13"
+      theme: "dracula"
+  "prettier-atom":
+    formatOnSaveOptions:
+      isDisabledIfNoConfigFile: true
+      isDisabledIfNotInPackageJson: true
+      showInStatusBar: true
+    prettierEslintOptions:
+      prettierLast: true
+    prettierOptions:
+      jsxBracketSameLine: true
+      printWidth: 120
+      semi: false
+      singleQuote: true
+    useEslint: true
+  "pretty-json":
+    prettifyOnSaveJSON: true
+  rainbow:
+    cycleDuration: 300000
+  "react-builder":
+    newComponentName: "MyriadNewComponent"
+    replacedComponentName: "MyriadReplacedComponent"
+  "sass-compiler":
+    extractPath: true
+    outputPath: "./public/css"
+    outputPathExtracted: "./public/css"
+  "seti-ui":
+    hideProjectTab: true
+    themeColor: "Orange"
+  "sync-settings":
+    _lastBackupHash: "fcaaf8c349d3cf1f6b5d1c53485b58b8b67f7fb7"
+    extraFiles: [
+      "toolbar.cson"
+      "custom_entries.json"
+      "github.cson"
+      "projects.cson"
+    ]
+    gistId: "0e84d0dd97ea89fafa195eb04a67f39b"
+    personalAccessToken: "2162b3d980046dc040be211fdb5ca16d9c952055"
+    quietUpdateCheck: true
+    removeObsoletePackages: true
+  "terminal-plus":
+    ansiColors:
+      normal:
+        black: "#676866"
+        blue: "#6dbebd"
+        green: "#eb617f"
+        red: "#d3d6d5"
+        yellow: "#363936"
+      zBright:
+        brightBlack: "#363936"
+        brightBlue: "#2f8cc4"
+        brightCyan: "#1d8f8d"
+        brightGreen: "#2dce2f"
+        brightMagenta: "#e73573"
+        brightRed: "#d22617"
+        brightWhite: "#e5e8e7"
+        brightYellow: "#e4b300"
+    core:
+      autoRunCommand: "source /Users/derekscott/.bash_profile"
+    iconColors:
+      blue: "#28acfc"
+      cyan: "#1d8f8d"
+      green: "#2dce2f"
+      magenta: "#e73573"
+      orange: "#ff8b3f"
+      pink: "#e73573"
+      purple: "#a537cb"
+      red: "#d22617"
+      yellow: "#e4b300"
+    style:
+      defaultPanelHeight: "500px"
+      fontFamily: "\"Fira Code\""
+      fontSize: "13"
+      theme: "dracula"
+  "tool-bar":
+    iconSize: "16px"
+    position: "Bottom"
+  "tool-bar-almighty":
+    custom: "all_thirteen_tools.json"
+    override: true
+  welcome:
+    showOnStartup: false
+".css.scss.source":
+  editor:
+    scrollPastEnd: true
+    softWrapAtPreferredLineLength: true
+".sass.source":
+  editor:
+    scrollPastEnd: true

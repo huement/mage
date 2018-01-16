@@ -12,7 +12,7 @@ mageCMD=1;
 #   What the script ends up doing after passing setup checks
 #   Heavily dependent on what parameters have been passed
 #
-source $scriptPath/.mage/coat.sh;
+#source $scriptPath/.mage/coat.sh;
 
 
 # Infobot
@@ -41,8 +41,8 @@ function logicInfoCat {
   # create an array with all the filer/dir inside ~/myDir
   arrF=("${dataLocation}"/*)
   # iterate through array using a counter
-  printf "${B_WHT}${BBLK} INFO TOPICS ${NORMAL}            ${BCYN}cmd| ${BOLD}${scriptName} info ${NORMAL}${BCYN}<option>${NORMAL}"
-  echo -e "\n"
+  printf "${B_WHT}${BCYN} INFO TOPICS            | cmd | ${scriptName} info <option>${NORMAL}"
+  printf "\n"
   iREAL=0;
   for ((i=0; i<${#arrF[@]}; i++)); do
       #do something to each element of array
@@ -55,13 +55,13 @@ function logicInfoCat {
   done
   unset lname;
 
-  echo -e "\n\n${NORMAL}"
+  printf "\n\n${NORMAL}"
 }
 
 
 # LOGIC ERROR HANDLER
 function logicUnknown {
-  echo -e "${B_RED}[FAIL]${NORMAL} You made an unknown request.\nGet it together, and try ${BBLU}mage --help${NORMAL} and choose an available command.\n";
+  printf "${B_RED}[FAIL]${NORMAL} You made an unknown request.\nGet it together, and try ${BBLU}mage --help${NORMAL} and choose an available command.\n";
 	usage
 	die "exiting..."
 }
@@ -77,9 +77,7 @@ function nothingError {
 # any options for debugging or other runtime mods
 # -----------------------------------
 function usage {
-echo "
-${BCYN}COMMANDS        ${scriptName} <command> <param1,param2,...>
-${WHT}--------------------------------------------------------------------------
+echo "${NORMAL}COMMANDS        ${scriptName} <command> <param1,param2,...>${NORMAL}
 ${BRED}list${WHT}            Info dump. If no param dump categories. Be specific!
 ${BRED}sync${WHT}            Dotfile functions. (requires param)
 ${CYN} + ${BBLU}backup${BWHT}          Backup ${USER}/dotfiles
@@ -87,7 +85,7 @@ ${CYN} + ${BBLU}restore${BWHT}         Restore saved dotfiles
 ${CYN} + ${BBLU}swap${BWHT}            Quickly toggle dotfiles in and out.
 ${BRED}run${WHT}             Execute a given user script. (requires param)
 ${BRED}update${WHT}          Update packages and scripts"
-echo -e "\n\n"
+printf "\n\n"
 }
 
 function usagemods {
@@ -109,14 +107,31 @@ echo "${NORMAL}"
 #   Functions used to generate the "UI" for the Mage Script
 #
 
+# function header {
+#     printf "\n${BLU}"
+#     cat "${mageDir}/trunk/ascii/art/mage.txt"
+#     printf "\t${RED}[${WHT}${vMage}${RED}]${NORMAL}\n";
+# }
+# function header {
+#   printf "\n"
+#   printf "${BBLU}888b     d888       d8888 .d8888b. 8888888888 \n"
+#   printf "8888b   d8888      d88888d88P  Y88b888        \n"
+#   printf "88888b.d88888     d88P888888    888888        \n"
+#   printf "${BBLU}888Y88888P888    d88P 888888       8888888    \n"
+#   printf "${BGRN}888 Y888P 888   d88P  888888  88888888        \n"
+#   printf "${BGRN}888  Y8P  888  d88P   888888    888888        \n"
+#   printf "${BBLU}888       888 d8888888888Y88b  d88P888        \n"
+#   printf "888       888d88P     888  Y8888P888888888888 ${vMage} \n"
+#   printf "${NORMAL}"
+# }
 function header {
-		echo -e "\n${BLU}"
-    cat "${mageDir}/trunk/ascii/art/mage.txt"
-		echo -e "\t${RED}[${WHT}${vMage}${RED}]${NORMAL}\n";
+    echo "${BRED}";
+    cat "${mageDir}/trunk/ascii/art/mage_sm.txt";
+    echo "${NORMAL}";
 }
 
 function header_sm {
-    printf "${BRED}";
+    echo "${BRED}";
     cat "${mageDir}/trunk/ascii/art/mage_sm.txt";
     echo "${NORMAL}";
 }
@@ -160,7 +175,7 @@ function simpleprint {
 
 ## Clear some space
 function linebreak {
-  echo -e "\n\n\n";
+  printf "\n\n\n";
 }
 
 ## Stauts Messages
@@ -180,15 +195,15 @@ function _alert {
 
   # Print to $logFile
   if [[ ${printLog} = "true" ]] || [ "${printLog}" == "1" ]; then
-    echo -e "$(date +"%m-%d-%Y %r") $(printf "[%9s]" "${1}") ${_message}" >> "${logFile}";
+    printf "$(date +"%m-%d-%Y %r") $(printf "[%9s]" "${1}") ${_message}" >> "${logFile}";
   fi
 
   # Print to console when script is not 'quiet'
   if [[ "${quiet}" = "true" ]] || [ "${quiet}" == "1" ]; then
     return
   else
-    echo -e "$(date +"%r") ${color}$(printf "[%9s]" "${1}") ${_message}";
-    echo -e "${BBRED}${2}${NORMAL}";
+    printf "$(date +"%r") ${color}$(printf "[%9s]" "${1}") ${_message}";
+    printf "${BBRED}${2}${NORMAL}";
   fi
 
 }

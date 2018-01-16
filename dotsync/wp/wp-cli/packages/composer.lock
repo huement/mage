@@ -1,0 +1,328 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "906729db57dc350a96f3d0562ad6114d",
+    "packages": [
+        {
+            "name": "JayWood/jw-wpcli-random-posts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayWood/jw-wpcli-random-posts.git",
+                "reference": "f19421701548fd2b044be89706fe4c8db5b8f529"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayWood/jw-wpcli-random-posts/zipball/f19421701548fd2b044be89706fe4c8db5b8f529",
+                "reference": "f19421701548fd2b044be89706fe4c8db5b8f529",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "wp-cli-package",
+            "autoload": {
+                "files": [
+                    "generate-posts.php"
+                ]
+            },
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Jay Wood",
+                    "email": "jjwood2004@gmail.com",
+                    "homepage": "http://plugish.com"
+                }
+            ],
+            "description": "A robust random post generator for WP CLI which supports multisite, post types, post counts, taxonomies, terms, term counts and featured images.",
+            "homepage": "http://plugish.com",
+            "keywords": [
+                "placeholder",
+                "random posts",
+                "wordpress",
+                "wp-cli"
+            ],
+            "support": {
+                "source": "https://github.com/JayWood/jw-wpcli-random-posts/tree/1.3",
+                "issues": "https://github.com/JayWood/jw-wpcli-random-posts/issues"
+            },
+            "time": "2017-11-19T04:47:09+00:00"
+        },
+        {
+            "name": "wp-cli/core-command",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:wp-cli/core-command.git",
+                "reference": "2ef05ac01560c571530d539a517aaa587908a851"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/core-command/zipball/2ef05ac01560c571530d539a517aaa587908a851",
+                "reference": "2ef05ac01560c571530d539a517aaa587908a851",
+                "shasum": ""
+            },
+            "require-dev": {
+                "behat/behat": "~2.5",
+                "wp-cli/wp-cli": "*"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "core",
+                    "core check-update",
+                    "core download",
+                    "core install",
+                    "core is-installed",
+                    "core multisite-convert",
+                    "core multisite-install",
+                    "core update",
+                    "core update-db",
+                    "core version"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "core-command.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                }
+            ],
+            "description": "Downloads, installs, updates, and manages a WordPress installation.",
+            "homepage": "https://github.com/wp-cli/core-command",
+            "support": {
+                "issues": "https://github.com/wp-cli/core-command/issues",
+                "source": "https://github.com/wp-cli/core-command/tree/v1.0.7"
+            },
+            "time": "2017-12-11T12:56:16+00:00"
+        },
+        {
+            "name": "wp-cli/db-command",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:wp-cli/db-command.git",
+                "reference": "162d72acfd6dc1478e2ef249160bffbfa4293371"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/db-command/zipball/162d72acfd6dc1478e2ef249160bffbfa4293371",
+                "reference": "162d72acfd6dc1478e2ef249160bffbfa4293371",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "*"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "bundled": true,
+                "commands": [
+                    "db",
+                    "db create",
+                    "db drop",
+                    "db reset",
+                    "db check",
+                    "db optimize",
+                    "db prefix",
+                    "db repair",
+                    "db cli",
+                    "db query",
+                    "db export",
+                    "db import",
+                    "db search",
+                    "db tables",
+                    "db size"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                },
+                "files": [
+                    "db-command.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                }
+            ],
+            "description": "Performs basic database operations using credentials stored in wp-config.php.",
+            "homepage": "https://github.com/wp-cli/db-command",
+            "support": {
+                "issues": "https://github.com/wp-cli/db-command/issues",
+                "source": "https://github.com/wp-cli/db-command/tree/v1.3.2"
+            },
+            "time": "2017-12-08T15:04:48+00:00"
+        },
+        {
+            "name": "wp-cli/doctor-command",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/doctor-command.git",
+                "reference": "9656de32c62b7d65c002fa54e6bc942304bee7cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/doctor-command/zipball/9656de32c62b7d65c002fa54e6bc942304bee7cd",
+                "reference": "9656de32c62b7d65c002fa54e6bc942304bee7cd",
+                "shasum": ""
+            },
+            "require": {
+                "wp-cli/wp-cli": "*"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "readme": {
+                    "sections": [
+                        "Overview",
+                        "Using",
+                        "Installing",
+                        "Contributing"
+                    ],
+                    "overview": {
+                        "body": "bin/readme/overview-body.md"
+                    }
+                },
+                "commands": [
+                    "doctor check",
+                    "doctor list"
+                ]
+            },
+            "autoload": {
+                "files": [
+                    "command.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bachhuber",
+                    "email": "daniel@runcommand.io",
+                    "homepage": "https://runcommand.io"
+                }
+            ],
+            "description": "Diagnose problems within WordPress by running a series of checks for symptoms.",
+            "homepage": "https://runcommand.io/wp/doctor/",
+            "support": {
+                "source": "https://github.com/wp-cli/doctor-command/tree/master",
+                "issues": "https://github.com/wp-cli/doctor-command/issues"
+            },
+            "time": "2017-11-27T15:54:53+00:00"
+        },
+        {
+            "name": "wp-cli/profile-command",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-cli/profile-command.git",
+                "reference": "efb296ba91c041bfeccea673df3019c3bb72b1b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-cli/profile-command/zipball/efb296ba91c041bfeccea673df3019c3bb72b1b5",
+                "reference": "efb296ba91c041bfeccea673df3019c3bb72b1b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "wp-cli/wp-cli": "*"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5"
+            },
+            "type": "wp-cli-package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "commands": [
+                    "profile stage",
+                    "profile hook",
+                    "profile eval",
+                    "profile eval-file"
+                ],
+                "readme": {
+                    "sections": [
+                        "Overview",
+                        "Using",
+                        "Installing",
+                        "Contributing"
+                    ],
+                    "overview": {
+                        "post": "bin/readme/overview-body.md"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "command.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Quickly identify what's slow with WordPress.",
+            "homepage": "https://runcommand.io/wp/profile/",
+            "support": {
+                "source": "https://github.com/wp-cli/profile-command/tree/master",
+                "issues": "https://github.com/wp-cli/profile-command/issues"
+            },
+            "time": "2017-12-11T19:01:50+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "jaywood/jw-wpcli-random-posts": 20,
+        "wp-cli/core-command": 20,
+        "wp-cli/db-command": 20,
+        "wp-cli/profile-command": 20,
+        "wp-cli/doctor-command": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

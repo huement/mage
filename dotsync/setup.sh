@@ -49,15 +49,16 @@ function DisplayInfo {
 }
 
 function TemplateBuild {
-  echo "";
-  echo "STARTING BUILD.  .   ."
-  mkdir ./bash
-  mv ~/.bashrc ./bash
-  mv ~/.bash_profile ./bash
-  mv ~/.profile ./bash
-  echo ""
-  echo "BUILD FINISHED!"
-  echo ""
+  # echo "";
+#   echo "STARTING BUILD.  .   ."
+#   mkdir ./bash
+#   mv ~/.bashrc ./bash
+#   mv ~/.bash_profile ./bash
+#   mv ~/.profile ./bash
+#   echo ""
+#   echo "BUILD FINISHED!"
+#   echo ""
+echo "BUILD";
 }
 
 if [[ $# -eq 0 ]] ; then

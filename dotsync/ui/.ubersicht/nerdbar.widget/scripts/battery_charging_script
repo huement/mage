@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+/usr/bin/pmset -g batt | /usr/bin/grep "'.*'" | /usr/bin/sed "s/'//g" | /usr/bin/cut -c 18-19

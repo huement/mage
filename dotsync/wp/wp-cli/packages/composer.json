@@ -1,0 +1,47 @@
+{
+    "name": "wp-cli/wp-cli",
+    "description": "Installed community packages used by WP-CLI",
+    "version": "1.4.0",
+    "authors": [
+        {
+            "name": "WP-CLI",
+            "email": "noreply@wpcli.org"
+        }
+    ],
+    "homepage": "https://wp-cli.org/package-index/",
+    "require": {
+        "jaywood/jw-wpcli-random-posts": "dev-master",
+        "wp-cli/core-command": "dev-master",
+        "wp-cli/db-command": "dev-master",
+        "wp-cli/profile-command": "dev-master",
+        "wp-cli/doctor-command": "dev-master"
+    },
+    "require-dev": {},
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "repositories": {
+        "wp-cli": {
+            "type": "composer",
+            "url": "https://wp-cli.org/package-index/"
+        },
+        "wp-cli/core-command": {
+            "type": "vcs",
+            "url": "git@github.com:wp-cli/core-command.git"
+        },
+        "wp-cli/db-command": {
+            "type": "vcs",
+            "url": "git@github.com:wp-cli/db-command.git"
+        },
+        "wp-cli/profile-command": {
+            "type": "vcs",
+            "url": "git@github.com:wp-cli/profile-command.git"
+        },
+        "wp-cli/doctor-command": {
+            "type": "vcs",
+            "url": "git@github.com:wp-cli/doctor-command.git"
+        }
+    },
+    "config": {
+        "secure-http": true
+    }
+}

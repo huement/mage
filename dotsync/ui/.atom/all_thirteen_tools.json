@@ -1,0 +1,51 @@
+[
+  {
+    "callback": "application:new-file",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "New File",
+    "type": "button"
+  },
+  {
+    "callback": "application:new-file",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "New File",
+    "type": "button"
+  },
+  {
+    "callback": "intentions:highlight",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "intentions highlight",
+    "type": "button"
+  },
+  {
+    "callback": "application:new-file",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "New File",
+    "type": "button"
+  },
+  {
+    "callback": "application:new-file",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "New File",
+    "type": "button"
+  },
+  {
+    "callback": "application:new-file",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "New File",
+    "type": "button"
+  },
+  {
+    "callback": "application:new-file",
+    "icon": "plus",
+    "iconset": "ion",
+    "tooltip": "New File",
+    "type": "button"
+  }
+]

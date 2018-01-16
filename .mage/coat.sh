@@ -103,3 +103,5 @@ else
 	NOBLINK="\e[25m"              # NO Blink
 	REVERSE="\e[50m"              # Reverse
 fi;
+
+export MageCoat=1;

@@ -1,0 +1,14 @@
+{
+  "lists": [
+    {
+      "todocli": [
+        {
+          "remote dot files": "sshrc"
+        },
+        {
+          "theme builder": "base16-builder"
+        }
+      ]
+    }
+  ]
+}

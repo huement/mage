@@ -1,0 +1,13 @@
+core install:
+  url: prairiegrit.dev:8888
+  admin_user: admin
+  admin_password: admin
+  admin_email: dscott@myriadmobile.com
+  title: WordPress Development
+core config:
+  dbuser: root
+  dbpass: parad3
+  dbhost: localhost
+  extra-php: |
+        define( 'WP_DEBUG', true );
+        define( 'WP_POST_REVISIONS', 0 );

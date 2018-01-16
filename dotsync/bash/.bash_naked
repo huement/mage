@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+#	____________________._______   _______________________________
+#	\______   \______   \   \   \ /   /  _  \__    ___/\_   _____/
+#	 |     ___/|       _/   |\   Y   /  /_\  \|    |    |    __)_ 
+#	 |    |    |    |   \   | \     /    |    \    |    |        \
+#	 |____|    |____|_  /___|  \___/\____|__  /____|   /_______  /
+#	                  \/                    \/                 \/ 
+#
+#	CUSTOM USER DATA. CHANGES HERE ARE IGNORED IN THE MASTER REPO
+#
+# YOU WILL FEEL NAKED IF THIS FILE GETS OUT
+#
+
+# SET GLOBAL USERNAME (prevent root login from messing up shortcuts)
+# ------------------   -----   ----    ---    --    -
+export GUSER="derekscott"
+
+# Git Credentials (modifies ~/.gitconfig)
+# ------------------   -----   ----    ---    --    -
+GIT_AUTHOR_NAME="Derek Scott"
+GIT_AUTHOR_EMAIL="dscott@myriadmobile.com"
+HOMEBREW_GITHUB_API_TOKEN="4864c091306863186f328051014cc4394375f155"
+
+# AWS Credentials
+# ------------------   -----   ----    ---    --    -
+alias blackSSH="ssh -i ~/.ssh/huement_aws.pem ubuntu@black.huement.com"
+alias cloudSSH="ssh -i ~/.ssh/ndrigs.pem ubuntu@huement.com"
+
+# EXTRAS
+alias volset="~/mage/dotsync/macOS/Ubersicht/nerdbar.widget/scripts/getvolume.sh"
+
+LUNCHY_DIR="~/.rvm/gems/ruby-2.4.1@global/gems/lunchy-0.10.4/extras"
+if [ -f $LUNCHY_DIR/lunchy-completion.bash ]; then
+ . $LUNCHY_DIR/lunchy-completion.bash
+fi
+
+# Figlet ASCII Text
+# ------------------   -----   ----    ---    --    -
+alias figcol='fig colossal'
+alias figcolbash='figbash colossal'
+alias figcolcss='figcss colossal'
+alias figgra='fig graffiti'
+alias figgrabash='figbash graffiti'
+alias figgracss='figcss graffiti'
+
+alias figbig='figlet -f big'
+alias figsm='figlet -f small'
+alias figunv='figlet -f univers'
+
+function fighelp {
+	echo -n "\n${BGRN}FIGLET HELP\n${NORMAL}Three output modes:\n${NORMAL}1. ${BGRN}Regular   ${NORMAL}2. ${BGRN}Bash Comment   ${NORMAL}3. ${BGRN}JS/CSS Comment\n\n${BBLU}";
+	echo "fig <fontname> | figlet -S -f <var1> <var2> | sed 's/^/  /'";
+	echo "figbash <fontname> | figlet -s -f <var1> <var2> | sed 's/^/  /' | sed 's/^\([^#]\)/#\1/g | sed 's/^/ /'";
+	echo "figcss <fontname> | figlet -s -f <var1> <var2> | sed 's/^/  /' | sed 's/^\([^*]\)/*\1/g' | sed 's/^/ /'";
+	echo -n "\n\n${NORMAL}";
+}
+
+function fig {
+	figlet -w 200 -c -o -f $1 $2 | sed 's/^/  /'
+}
+
+function figbash {
+	figlet -o -f $1 $2 | sed 's/^/  /' | sed 's/^\([^#]\)/#\1/g' | sed 's/^/ /'
+}
+
+function figcss {
+	figlet -o -f $1 $2 | sed 's/^/  /' | sed 's/^\([^*]\)/*\1/g' | sed 's/^/ /'
+}

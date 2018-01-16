@@ -1,0 +1,133 @@
+#	                                             888
+#	                                             888
+#	                                             888
+#	 88888b. 888d888 .d88b. 88888b.d88b. 88888b. 888888
+#	 888 "88b888P"  d88""88b888 "888 "88b888 "88b888
+#	 888  888888    888  888888  888  888888  888888
+#	 888 d88P888    Y88..88P888  888  888888 d88PY88b.
+#	 88888P" 888     "Y88P" 888  888  88888888P"  "Y888
+#	 888                                 888
+#	 888                                 888
+#	 888                                 888
+
+#   BASH PROMPT SETUP
+###################################################
+
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+    export TERM='gnome-256color';
+elif infocmp xterm-256color >/dev/null 2>&1; then
+    export TERM='xterm-256color';
+fi;
+
+
+#   PS1 SMILEY Prompt Display
+###################################################
+PROMPT_COMMAND=smile_prompt
+
+function load_out() {
+  echo -n `uptime|awk '{min=NF-2;print $min}'`
+}
+
+function rightpromptstring {
+		if [ ${COLUMNS} -gt 128 ];
+		then
+			now="$(date +'%r')"
+    	printf "${B_BLK} %*s\r" $(( COLUMNS-1 )) "$now"
+		fi
+}
+
+#   Prompt: get current branch in git repo
+###################################################
+function parse_git_branch {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo " ${BRANCH}${STAT} "
+	else
+		echo " $USER "
+	fi
+}
+
+#   Prompt: get current status of git repo
+###################################################
+function parse_git_dirty {
+	status='git status 2>&1 | tee'
+	dirty='echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"'
+	untracked='echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"'
+	ahead='echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"'
+	newfile='echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"'
+	renamed='echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"'
+	deleted='echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"'
+	bits=''
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
+}
+
+#   Prompt: Happy or sad status message
+###################################################
+function smile_prompt
+{
+  if [ "$?" -eq "0" ];
+  then
+    #smiley
+    SC="\[$B_GRN\]\[$WHT\] ! "
+    BK="\[$WHT\]\[$B_GRN\]"
+  else
+    #frowney
+    SC="\[$B_YLW\]\[$WHT\] - "
+    BK="\[$WHT\]\[$B_YLW\]"
+  fi
+
+  if [[ $UID == 0 ]];
+  then
+    #normal user color
+    UC="\[$WHT\]"
+    BC="\[$B_PUR\]"
+    DS="\[$B_BLU\]\[$WHT\]"
+  else
+    #root user color
+    UC="\[$WHT\]"
+    BC="\[$B_BLU\]"
+    DS="\[$WHT\]\[$B_RED\]"
+  fi
+
+	# Highlight the hostname when connected via SSH.
+	if [[ "${SSH_TTY}" ]]; then
+	    UC="\[$B_RED\]";
+	    BC="\[$PUR\]"
+	    DS="\[$WHT\]\[$B_YLW\] \h "
+			DS+="\[$WHT\]\[$B_RED\]"
+	fi;
+
+	PS1="${BK}${SC}${BC}${UC} \W ${DS}\$(parse_git_branch)\[${NORMAL}\] "
+
+	history -a # write previous executed command to the history
+}
+
+#PS1="\\$ "
+PS2="\\$ ";
+
+
+export SC BK UC DB DS PS1 PS2;

@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 # MOTD MacOS
-#############################
+# ------------------ --------- ------ ---- --- -- -
 
-source ~/.bash_rainbow
+# COLOR SETUP
+if tput setaf 1&>/dev/null;then BLK="$(tput setaf 0)";RED="$(tput setaf 1)";GRN="$(tput setaf 2)";YLW="$(tput setaf 3)";BLU="$(tput setaf 4)";PUR="$(tput setaf 5)";CYN="$(tput setaf 6)";WHT="$(tput setaf 7)";BBLK="$(tput setaf 8)";BRED="$(tput setaf 9)";BGRN="$(tput setaf 10)";BYLW="$(tput setaf 11)";BBLU="$(tput setaf 12)";BPUR="$(tput setaf 13)";BCYN="$(tput setaf 14)";BWHT="$(tput setaf 15)";B_BLK="$(tput setab 0)";B_RED="$(tput setab 1)";B_GRN="$(tput setab 2)";B_YLW="$(tput setab 3)";B_BLU="$(tput setab 4)";B_PUR="$(tput setab 5)";B_CYN="$(tput setab 6)";B_WHT="$(tput setab 7)";BB_BLK="$(tput setab 8)";BB_RED="$(tput setab 9)";BB_GRN="$(tput setab 10)";BB_YLW="$(tput setab 11)";BB_BLU="$(tput setab 12)";BB_PUR="$(tput setab 13)";BB_CYN="$(tput setab 14)";BB_WHT="$(tput setab 7)";NORMAL="$(tput sgr0)";BOLD="$(tput bold)";UNDERLINE="$(tput smul)";NOUNDER="$(tput rmul)";BLINK="$(tput blink)";REVERSE="$(tput rev)";else BLK="\e[1;30m";RED="\e[1;31m";GRN="\e[1;32m";YLW="\e[1;33m";BLU="\e[1;34m";PUR="\e[1;35m";CYN="\e[1;36m";WHT="\e[1;37m";BBLK="\e[1;30m";BRED="\e[1;31m";BGRN="\e[1;32m";BYLW="\e[1;33m";BBLU="\e[1;34m";BPUR="\e[1;35m";BCYN="\e[1;36m";BWHT="\e[1;37m";B_BLK="\e[40m";B_RED="\e[41m";B_GRN="\e[42m";B_YLW="\e[43m";B_BLU="\e[44m";B_PUR="\e[45m";B_CYN="\e[46m";B_WHT="\e[47m";BB_BLK="\e[1;40m";BB_RED="\e[1;41m";BB_GRN="\e[1;42m";BB_YLW="\e[1;43m";BB_BLU="\e[1;44m";BB_PUR="\e[1;45m";BB_CYN="\e[1;46m";BB_WHT="\e[1;47m";NORMAL="\e[0m";BOLD="\e[1m";UNDERLINE="\e[4m";NOUNDER="\e[24m";BLINK="\e[5m";NOBLINK="\e[25m";REVERSE="\e[50m";fi;
+  
 
 function OS_X_V {
   # Mac OS Details
@@ -136,6 +138,7 @@ function macNames {
       "10.10"*) codename="OS X Yosemite" ;;
       "10.11"*) codename="OS X El Capitan" ;;
       "10.12"*) codename="macOS Sierra" ;;
+      "10.13"*) codename="macOS High Sierra" ;;
       *)        codename="macOS" ;;
     esac
 
@@ -148,27 +151,61 @@ function title_name {
   hostname="${HOSTNAME:-$(hostname)}"
   title="${title_color}${bold}${user}${at_color}@${title_color}${bold}${hostname}"
   length="$((${#user} + ${#hostname} + 1))"
-
   echo "${title}"
 }
 
-echo ""
-echo "${BB_BLU}${WHT} `date +"%A %e %B %Y, %r"` ${NORMAL}";
-echo "${BGRN}
-0010100010101101000100001110000010100111     $(title_name)
-0010100010101101000100001110000010100111     $(macNames)
-0010100010101101000100001110000010100111     $(kernel_details)
-0010100010101101000100001110000010100111     $(sm_bios)
-0010100010101101000100001110000010100111     $(shell_env)${NORMAL}
+tput clear      # clear the screen; tput cup 1 15
+tput cup 1 36;
+printf "${B_BLU}${BLK} `date +"%A %e %B %Y, %r"` ${NORMAL}";
+tput cup 3 36;
 
-0010100010101101000100001110000010100111     $(wifi_status)
-0010100010101101000100001110000010100111     $(xcode_ver)
+ gline=3;
+ 
+ echo "USER............. $(title_name)";
+ 
+ gline=$((gline+1));tput cup $gline 36;
+ 
+ echo "SYSTEM........... $(macNames) | $(kernel_details)";
+ 
+ gline=$((gline+1));tput cup $gline 36;
+ 
+ echo "MODEL............ $(sm_bios)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "SHELL............ $(shell_env)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "WIFI............. $(wifi_status)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "CPU.............. $(cpu_details)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "LOAD............. $(get_cpu_usage)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "MEMORY........... $(hardware_ram)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
 
-0010100010101101000100001110000010100111     $(cpu_details)
-0010100010101101000100001110000010100111     $(get_cpu_usage)
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "$(hardware_ram)";
+ 
+  gline=$((gline+1));tput cup $gline 36;
+  
+ echo "$(hardware_memory)";
 
-0010100010101101000100001110000010100111     $(hardware_ram)
-0010100010101101000100001110000010100111     $(hardware_memory)
-
-${NORMAL}"
 echo "${get_cpu_usage}"
+
+tput cup 0 0;
+cat './crest_ansi.txt';
+echo ""
+echo ""

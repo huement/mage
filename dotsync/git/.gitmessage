@@ -1,0 +1,18 @@
+## Git Commit Message Docs
+## https://github.com/sparkbox/standard/tree/master/style/git
+##
+## Allowed Values for <type> 
+## 		feat (new feature), fix (bug fix), docs, style (formatting etc; no code change)
+## 		refactor (refactoring production code), test (adding missing tests etc; no production code change)
+##		chore (updating grunt tasks etc; no production code change)
+##
+## Subject (Emoji) : :fire: feat (buybox): removed unused container elements
+## 
+## Footer : Reference issues and pull requests
+##		Example: closes #125
+##
+<type>: <subject>
+
+<body>
+
+<footer>
