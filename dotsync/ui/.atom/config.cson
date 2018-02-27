@@ -51,8 +51,10 @@
     tabs:
       compactTabs: true
       noTabMinWidth: true
+      stretchedTabs: true
       tintedTabBar: true
-    ui: {}
+    ui:
+      panelShadows: true
   "color-picker":
     uppercaseColorValues: true
   core:
@@ -76,6 +78,9 @@
       "fancy-react"
       "sass-compiler"
       "atom-sort-sass"
+      "sass-autocompile"
+      "linter-sass-lint"
+      "quick-scss"
     ]
     ignoredNames: [
       ".git"
@@ -85,21 +90,23 @@
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "no"
     themes: [
-      "pristine-ui"
-      "atom-dark-monokai-syntax"
+      "dark-flat-ui"
+      "outlander-syntax"
     ]
     titleBar: "custom"
     useProxySettingsWhenCallingApm: false
+  "dark-flat-ui":
+    accentColor: "purple"
   editor:
     fontFamily: "Fira Code"
     fontSize: 13
     lineHeight: 1.2
     preferredLineLength: 180
-    showCursorOnSelection: false
     softWrap: true
     tabType: "soft"
     undoGroupingInterval: 250
   "eslint-fixer":
+    eslintPath: "/Users/derekscott/.nvm/node_modules/.bin/eslint"
     ysuccess:
       contents: true
     zerror:
@@ -139,6 +146,7 @@
     ]
   "linter-php":
     executablePath: "/usr/local/bin/php"
+  "linter-scss-lint": {}
   "linter-shellcheck":
     enableNotice: true
     shellcheckExecutablePath: "/usr/local/bin/shellcheck"
@@ -146,6 +154,8 @@
     gutterPosition: "Left"
     panelHeight: 357
     statusBarPosition: "Right"
+  "markdown-preview":
+    useGitHubStyle: true
   "night-day-theming":
     darkSyntaxTheme: "atom-material-syntax-dark"
     darkUITheme: "dash-ui"
@@ -188,9 +198,10 @@
       defaultPanelHeight: "400px"
       fontFamily: "Fira Code"
       fontSize: "13"
-      theme: "dracula"
+      theme: "homebrew"
   "prettier-atom":
     formatOnSaveOptions:
+      enabled: true
       isDisabledIfNoConfigFile: true
       isDisabledIfNotInPackageJson: true
       showInStatusBar: true
@@ -204,6 +215,10 @@
     useEslint: true
   "pretty-json":
     prettifyOnSaveJSON: true
+  "pristine-ui":
+    tabSizing: "Maximum"
+  "project-manager":
+    sortBy: "last modified"
   rainbow:
     cycleDuration: 300000
   "react-builder":
@@ -214,8 +229,9 @@
     outputPath: "./public/css"
     outputPathExtracted: "./public/css"
   "seti-ui":
+    compactView: true
     hideProjectTab: true
-    themeColor: "Orange"
+    themeColor: "Steel"
   "sync-settings":
     _lastBackupHash: "fcaaf8c349d3cf1f6b5d1c53485b58b8b67f7fb7"
     extraFiles: [
@@ -262,6 +278,8 @@
       fontFamily: "\"Fira Code\""
       fontSize: "13"
       theme: "dracula"
+  "tidy-markdown":
+    runOnSave: false
   "tool-bar":
     iconSize: "16px"
     position: "Bottom"

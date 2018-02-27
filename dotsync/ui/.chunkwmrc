@@ -12,11 +12,14 @@
 #
 # Plugins handled via Homebrew
 #
+
+chunkc core::log_level error
+
 chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 #chunkc core::load border.so
 chunkc core::load tiling.so
 #chunkc core::load ffm.so
-chunkc core::hotload 0
+chunkc core::hotload 1
 
 #
 # Desktop Confgis
@@ -24,51 +27,51 @@ chunkc core::hotload 0
 chunkc set global_desktop_mode           bsp
 chunkc set 1_desktop_mode                bsp
 chunkc set 2_desktop_mode                bsp
-chunkc set 3_desktop_mode                float
+chunkc set 3_desktop_mode                bsp
 chunkc set 4_desktop_mode                bsp
 chunkc set 5_desktop_mode                bsp
 #chunkc set 6_desktop_mode                float
 
 #chunkc set 1_desktop_tree                ~/.chunkwm_layouts/dev_1
 
-chunkc set global_desktop_offset_top     60
-chunkc set global_desktop_offset_bottom  60
-chunkc set global_desktop_offset_left    30
-chunkc set global_desktop_offset_right   30
+chunkc set global_desktop_offset_top     50
+chunkc set global_desktop_offset_bottom  30
+chunkc set global_desktop_offset_left    40
+chunkc set global_desktop_offset_right   40
 chunkc set global_desktop_offset_gap     30
 
-# chunkc set 1_desktop_offset_top          40
-# chunkc set 1_desktop_offset_bottom       60
-# chunkc set 1_desktop_offset_left         30
+chunkc set 1_desktop_offset_top          50
+chunkc set 1_desktop_offset_bottom       30
+# chunkc set 1_desktop_offset_left         40
 # chunkc set 1_desktop_offset_right        40
-# chunkc set 1_desktop_offset_gap          60
+# chunkc set 1_desktop_offset_gap          30
 
-# chunkc set 2_desktop_offset_top          40
-# chunkc set 2_desktop_offset_bottom       60
-# chunkc set 2_desktop_offset_left         30
+chunkc set 2_desktop_offset_top          50
+chunkc set 2_desktop_offset_bottom       30
+# chunkc set 2_desktop_offset_left         40
 # chunkc set 2_desktop_offset_right        40
-# chunkc set 2_desktop_offset_gap          60
+# chunkc set 2_desktop_offset_gap          30
 
-# chunkc set 3_desktop_offset_top          40
-# chunkc set 3_desktop_offset_bottom       60
-# chunkc set 3_desktop_offset_left         20
-# chunkc set 3_desktop_offset_right        30
+chunkc set 3_desktop_offset_top          50
+chunkc set 3_desktop_offset_bottom       30
+# chunkc set 3_desktop_offset_left         40
+# chunkc set 3_desktop_offset_right        40
 # chunkc set 3_desktop_offset_gap          60
 
-chunkc set 4_desktop_offset_top          60
+chunkc set 4_desktop_offset_top          50
 chunkc set 4_desktop_offset_bottom       60
 chunkc set 4_desktop_offset_left         40
 chunkc set 4_desktop_offset_right        40
 chunkc set 4_desktop_offset_gap          40
 
-chunkc set 5_desktop_offset_top          60
+chunkc set 5_desktop_offset_top          50
 chunkc set 5_desktop_offset_bottom       60
 chunkc set 5_desktop_offset_left         40
 chunkc set 5_desktop_offset_right        40
 chunkc set 5_desktop_offset_gap          40
 
-chunkc set desktop_padding_step_size     10
-chunkc set desktop_gap_step_size         10
+chunkc set desktop_padding_step_size     30
+chunkc set desktop_gap_step_size         20
 
 chunkc set bsp_spawn_left                1
 chunkc set bsp_optimal_ratio             1.618
@@ -131,7 +134,6 @@ chunkc tiling::rule --owner \"*\" --name Trash --state float
 chunkc tiling::rule --owner  \"Archive Utility\" --state float
 chunkc tiling::rule --owner \"App Store\" --state float
 chunkc tiling::rule --owner Harvest --state float
-#chunkc tiling::rule --owner Cyberduck --state float
 chunkc tiling::rule --owner Cyberduck --name Transfers --state float
 chunkc tiling::rule --owner PhpStorm --name \"*\" --state float
 chunkc tiling::rule --owner Pixelmator --state float

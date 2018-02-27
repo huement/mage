@@ -7,12 +7,15 @@ CURRENTMODE="$(/usr/local/bin/chunkc get ${CURRENTDESKTOP}_desktop_mode)";
 if [[ $(/usr/local/bin/chunkc tiling::query --desktops-for-monitor 3) ]]; then
   TDT=$(/usr/local/bin/chunkc tiling::query --desktops-for-monitor 3)
 else
-  TDT="$(/usr/local/bin/chunkc tiling::query --desktops-for-monitor 2)"
+  if [[ $(/usr/local/bin/chunkc tiling::query --desktops-for-monitor 2) ]]; then
+    TDT=$(/usr/local/bin/chunkc tiling::query --desktops-for-monitor 2)
+  else
+    TDT=$(/usr/local/bin/chunkc tiling::query --desktops-for-monitor 1)
+  fi
 fi
 
 FIN=$(grep -Eo '[0-9]+$' <<< $TDT)
 
-#echo "CHUNKTEST"
 if [[ ${CURRENTDESKTOP} != *"connection failed"* ]];then
   echo -n "${CURRENTMODE}@${CURRENTDESKTOP}@${FIN}"
 fi

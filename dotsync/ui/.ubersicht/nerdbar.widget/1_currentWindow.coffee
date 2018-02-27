@@ -9,12 +9,12 @@ render: (output) ->
 style: """
   -webkit-font-smoothing: antialiased
   color: #FFFFFF
-  font: 15px Hack
+  font: 16px Hack
   height: 16px
-  left: 320px
+  left: 215px
   overflow: hidden
   text-overflow: ellipsis
-  top: 18px
+  top: 3px
   width: 500px
   .icon
     font-size: 16px

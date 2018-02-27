@@ -11,9 +11,8 @@ style: """
   -webkit-font-smoothing: antialiased
   font: 15px Hack
   text-transform: uppercase
-  left: 3.5%
   color:#FFFFFF
-  top: 19px
+  top:3px
   width:200px
   cursor: pointer;
   .tilingMode
@@ -22,26 +21,26 @@ style: """
     position:absolute
     font-weight:bold
     color:#34A3DF
-    font-size:15px
-    left:50px
+    font-size:16px
+    left:173px
   .icon,.si
-    font-size: 15px
+    font-size: 25px
     font-family: 'FontAwesome'
   .screennum
-    top:0px
-    left:29px
+    top:0px;
+    left: 16px;
     position:absolute
     font-size:16px
     font-weight:bold;
     color:#56E159
   .logo
-    top:10px
-    left:2.8%
-    padding:6px
+    bottom:-15px
+    left:-15px
+    padding:22px
     border-radius:50%
-    background:#1f1f1f
+    background:rgba(0,0,0,0.90);
     position:fixed
-    font-size:24px
+    font-size:48px
     font-weight:bold;
     color:#D3D6D5
   .si
@@ -49,7 +48,10 @@ style: """
     color:#E73573
     padding: 0 5px 0 5px
   .dots
-    margin-left:100px
+    font-size:16px
+    margin-left:40px
+    margin-top:-22px
+    z-index:999
 """
 
 update: (output, domEl) ->

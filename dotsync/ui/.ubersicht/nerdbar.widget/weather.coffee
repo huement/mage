@@ -11,8 +11,8 @@ render: (output) ->
 
 style: """
   text-align: center
-  right: 3%
-  top: 17px
+  right: 0
+  top: 3px
   height: 16px
   font: 16px Hack
   cursor: pointer;
@@ -21,11 +21,11 @@ style: """
   .center
     text-align: center
   .weather_forecast
-    top: 1px
+    top: 12px
     width: 8em
     color:#E0E0E0
     background: #1f2029
-    right: 30px
+    right: 13px
     opacity: 0.75
     position: relative
     border-radius: 4px

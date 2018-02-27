@@ -134,3 +134,4 @@ alias server_httpd="sudo mate /Library/Server/web/config/apache2/httpd_server_ap
 alias server_status="sudo serveradmin fullstatus web"
 alias server_start="sudo serveradmin start web"
 alias server_stop="sudo serveradmin stop web"
+alias server_address="/usr/local/bin/bash /Users/derekscott/Mage/dotsync/ui/.ubersicht/NetworkInfo.widget/NetworkInfo.sh"

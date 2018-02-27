@@ -9,10 +9,11 @@ render: (output) ->
 
 style: """
   font: 14px Hack;
-  right: 5%;
-  bottom: 18px;
+  right: 20px;
+  bottom: 5px;
   color: #E5E8E7;
   height: 14px;
+  width:100%;
   .hdd,.cpu,.mem,.netarrow
     font-family: FontAwesome;
     font-size:16px;
@@ -27,7 +28,7 @@ style: """
     font-size:17px!important;
     line-height:1px;
     position:absolute;
-    top:9px;
+    bottom:8px;
     right:224px;
   .netspeed
     margin-top:-3px;
@@ -38,13 +39,20 @@ style: """
     position:absolute;
     font-size:18px!important;
     left:70px;
-    top:10px;
+    bottom:8px;
   .netarrow.blue
     color:#34A3DF;
     position:absolute;
     font-size:18px!important;
     left:-15px;
-    top:10px;
+    bottom:8px;
+  #networkWidgets
+    position:absolute;
+    left:135px;
+  #hardwareWidgets
+    right: 10px;
+    position:absolute;
+    
 """
 
 
@@ -65,8 +73,8 @@ getMem: (mem) ->
   memString = String(memNum)
   if memNum < 10
     memString = '0' + memString
-  return "<span class='mem icon'></span>" +
-         "<span class='white'>&nbsp&nbsp#{memString}%</span>"
+  return "<span class='mem icon'>&nbsp&nbsp</span>" +
+         "<span class='white'>#{memString}%</span>"
 
 convertBytes: (bytes) ->
   kb = bytes / 1024
@@ -81,11 +89,11 @@ usageFormat: (kb) ->
 getNetTraffic: (down, up) ->
   downString = @convertBytes(parseInt(down))
   upString = @convertBytes(parseInt(up))
-  return "<span class='netarrow icon blue'></span>" +
+  return "<div id='networkWidgets'><span class='netarrow icon blue'></span>" +
          "<span class='netspeed'>&nbsp#{downString}&nbsp</span>" +
          "<span>&nbsp</span>" +
          "<span class='netarrow icon orange'></span>" +
-         "<span class='netspeed'>&nbsp&nbsp#{upString}</span>"
+         "<span class='netspeed'>&nbsp&nbsp#{upString}</span></div>"
 
 getFreeSpace: (space) ->
   return "<span class='icon hdd'></span>&nbsp<span class='white'>#{space}gb</span>"
@@ -95,16 +103,16 @@ update: (output, domEl) ->
   # split the output of the script
   values = output.split('@')
 
-  cpu = values[0]
-  mem = values[1]
+  cpu  = values[0]
+  mem  = values[1]
   down = values[2]
   up   = values[3]
   free = values[4].replace(/[^0-9]/g,'')
 
   # create an HTML string to be displayed by the widget
-  htmlString =  @getNetTraffic(down, up) + "<span class='cyan'>&nbsp⎢&nbsp</span>" +
+  htmlString =  @getNetTraffic(down, up) + "<div id='hardwareWidgets'><span class='cyan'>&nbsp&nbsp</span>&nbsp" +
                 @getMem(mem) + "<span class='cyan'>&nbsp⎢&nbsp</span>" +
                 @getCPU(cpu) + "<span class='cyan'>&nbsp⎢&nbsp</span>" +
-                @getFreeSpace(free)
+                @getFreeSpace(free) + "</div>"
 
   $(domEl).find('.stats').html(htmlString)

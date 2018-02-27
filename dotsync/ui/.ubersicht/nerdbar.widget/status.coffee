@@ -8,8 +8,8 @@ render: (output) ->
   """
 
 style: """
-  right: 150px
-  top: 17px
+  right: 80px
+  top: 3px
   font: 14px Hack
   color: #FFFFFF
   height: 13px
@@ -36,7 +36,7 @@ style: """
     top: 1px
     position: relative
     color:#35CCCB
-    right: 8px
+    right: 4px
   .timesep.icon
     font-size: 16px
     font-family: 'FontAwesome'

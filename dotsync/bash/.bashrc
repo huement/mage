@@ -126,6 +126,8 @@ export NVM_DIR="/Users/${GUSER}/.nvm"
 ## Grunt Autocomplete
 eval "$(grunt --completion=bash)"
 
+NVMPATHDIR="/Users/${GUSER}/.nvm/node_modules/.bin/"
+
 #NOWAPATH="/Applications/Developer/NowaGUI.app/Contents/Resources/app/nodes:/Users/$USER/.nowa-gui/installation/node_modules/.bin:/Applications/Developer/NowaGUI.app/Contents/Resources/app/node_modules/.bin"
 
 if [ $DEBUGMODE = "0" ]; then debugLogger "Loaded NodeJS [NVM]"; fi
@@ -206,4 +208,4 @@ fi
 
 # FINAL PATH
 # ------------------   -----   ----    ---    --    -
-export PATH=$RUBYPATH:/usr/local/opt/openssl/bin:$PYTHONPATH:$PHPPATH:$GOMODPATH:$BREWPATH:$PATH
+export PATH=$RUBYPATH:/usr/local/opt/openssl/bin:$NVMPATHDIR:$PYTHONPATH:$PHPPATH:$GOMODPATH:$BREWPATH:$PATH
