@@ -34,3 +34,6 @@
   'alt-cmd-d': 'editor:duplicate-lines'
   'shift-cmd-D': 'editor:duplicate-lines'
   'shift-cmd-space': 'command-palette:toggle'
+
+'atom-pane atom-text-editor[data-grammar~="html"]:not([mini]):not(.autocomplete-active), atom-pane atom-text-editor[data-grammar~="xml"]:not([mini]):not(.autocomplete-active)':
+  'shift-enter': 'emmet:insert-formatted-line-break-only'

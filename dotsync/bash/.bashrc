@@ -126,7 +126,7 @@ export NVM_DIR="/Users/${GUSER}/.nvm"
 ## Grunt Autocomplete
 eval "$(grunt --completion=bash)"
 
-NVMPATHDIR="/Users/${GUSER}/.nvm/node_modules/.bin/"
+NVMPATHDIR="/Users/${GUSER}/.nvm/node_modules/.bin"
 
 #NOWAPATH="/Applications/Developer/NowaGUI.app/Contents/Resources/app/nodes:/Users/$USER/.nowa-gui/installation/node_modules/.bin:/Applications/Developer/NowaGUI.app/Contents/Resources/app/node_modules/.bin"
 

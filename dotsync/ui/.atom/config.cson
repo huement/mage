@@ -65,35 +65,30 @@
       "linter-jshint"
       "toolbar-basic"
       "toolbar-iconshortcuts"
-      "tool-bar-almighty"
       "rainbow"
-      "linter"
       "jsformat"
       "pretty-json"
       "aligner-typescript"
       "flatten-json"
-      "intentions"
       "react"
-      "sort-lines"
       "fancy-react"
-      "sass-compiler"
       "atom-sort-sass"
       "sass-autocompile"
-      "linter-sass-lint"
       "quick-scss"
     ]
     ignoredNames: [
       ".git"
       "node_modules"
     ]
-    projectHome: "/Volumes/FloppyDisk"
+    projectHome: "/"
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "no"
     themes: [
-      "dark-flat-ui"
+      "pristine-ui"
       "outlander-syntax"
     ]
     titleBar: "custom"
+    uriHandlerRegistration: "always"
     useProxySettingsWhenCallingApm: false
   "dark-flat-ui":
     accentColor: "purple"
@@ -131,8 +126,7 @@
     keep_array_indentation: true
     keep_function_indentation: true
   linter:
-    lintOnChange: false
-    lintOnOpen: false
+    lintOnChangeInterval: 2000
     lintPreviewTabs: false
   "linter-checkbashisms":
     executablePath: "/usr/local/bin/checkbashisms"
@@ -233,7 +227,7 @@
     hideProjectTab: true
     themeColor: "Steel"
   "sync-settings":
-    _lastBackupHash: "fcaaf8c349d3cf1f6b5d1c53485b58b8b67f7fb7"
+    _lastBackupHash: "603340b0cf9626fd49f3a14653a333917e6d9540"
     extraFiles: [
       "toolbar.cson"
       "custom_entries.json"
@@ -288,6 +282,10 @@
     override: true
   welcome:
     showOnStartup: false
+".blade.html.php.text":
+  editor:
+    commentEnd: " --}}"
+    commentStart: "{{-- "
 ".css.scss.source":
   editor:
     scrollPastEnd: true

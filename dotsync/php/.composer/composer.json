@@ -7,6 +7,7 @@
         "yab/homeforge": "^0.3.0",
         "liquidpineapple/ranch": "^1.0",
         "squizlabs/php_codesniffer": "*",
-        "wpreadme2markdown/wp2md": "^3.0"
+        "wpreadme2markdown/wp2md": "^3.0",
+        "tightenco/jigsaw": "^1.0"
     }
 }
