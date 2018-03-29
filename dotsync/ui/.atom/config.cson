@@ -72,9 +72,18 @@
       "flatten-json"
       "react"
       "fancy-react"
-      "atom-sort-sass"
       "sass-autocompile"
       "quick-scss"
+      "sass-compiler"
+      "sassdoc-generator"
+      "atom-css-clean"
+      "react-snippets"
+      "atom-css-comb"
+      "atom-sort-sass"
+      "linter-sass-lint"
+      "linter-scss-lint"
+      "linter"
+      "autocomplete-json"
     ]
     ignoredNames: [
       ".git"
@@ -90,6 +99,8 @@
     titleBar: "custom"
     uriHandlerRegistration: "always"
     useProxySettingsWhenCallingApm: false
+  "css-comb":
+    customConfig: "~/.csscomb.json"
   "dark-flat-ui":
     accentColor: "purple"
   editor:
@@ -140,7 +151,8 @@
     ]
   "linter-php":
     executablePath: "/usr/local/bin/php"
-  "linter-scss-lint": {}
+  "linter-scss-lint":
+    disableWhenNoConfigFileInPath: true
   "linter-shellcheck":
     enableNotice: true
     shellcheckExecutablePath: "/usr/local/bin/shellcheck"
@@ -195,7 +207,6 @@
       theme: "homebrew"
   "prettier-atom":
     formatOnSaveOptions:
-      enabled: true
       isDisabledIfNoConfigFile: true
       isDisabledIfNotInPackageJson: true
       showInStatusBar: true
@@ -220,6 +231,8 @@
     replacedComponentName: "MyriadReplacedComponent"
   "sass-compiler":
     extractPath: true
+    inputPath: "./sass"
+    inputPathExtracted: "scss"
     outputPath: "./public/css"
     outputPathExtracted: "./public/css"
   "seti-ui":
