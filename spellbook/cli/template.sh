@@ -45,4 +45,4 @@ hello() {
     exit
 }
 
-source ./base.sh
+source ./lib.sh
